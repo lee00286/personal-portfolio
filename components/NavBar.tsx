@@ -14,9 +14,9 @@ function NavBar() {
   const { currentPage, setCurrentPage } = useMenuContext();
 
   const navStyle: string =
-    'z-100 fixed left-0 bottom-0 inset-y-auto flex justify-between w-full h-auto px-3 py-4 border-b bg-gradient-to-b from-yellow-200 backdrop-blur-2xl dark:bg-yellow-700/30 dark:from-inherit';
+    'z-50 fixed left-0 bottom-0 inset-y-auto flex justify-between w-full h-auto px-3 py-4 border-b bg-gradient-to-b from-yellow-200 backdrop-blur-2xl dark:bg-yellow-700/30 dark:from-inherit';
   const navStyleLg: string =
-    'lg:static lg:left-auto lg:bottom-auto lg:inset-x-0 lg:inset-y-0 lg:flex-col lg:justify-center lg:w-auto lg:w-auto lg:rounded-xl lg:border lg:bg-yellow-200 lg:dark:bg-yellow-700/30 lg:drop-shadow-md';
+    'lg:static lg:left-auto lg:bottom-auto lg:inset-x-0 lg:inset-y-0 lg:flex-col lg:justify-center lg:w-auto lg:rounded-xl lg:border lg:bg-yellow-200 lg:dark:bg-yellow-700/30 lg:drop-shadow-md';
 
   const menuStyle = (pageNum: number, isLast = false): string => {
     return `select-none h-12 w-12 p-2 bg-gradient-to-b rounded-xl cursor-pointer lg:h-20 lg:w-20 lg:p-4 ${
