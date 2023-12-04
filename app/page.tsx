@@ -1,14 +1,20 @@
+import { ChakraProvider } from '@chakra-ui/react';
 import Body from '@/components/Body';
 import NavBar from '@/components/NavBar';
 import { MenuProvider } from '@/context/menuState';
 
+export const styles =
+  'min-h-screen flex justify-center items-center lg:p-16 md:p-0 font-mono bg-yellow-50';
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex items-center justify-center p-24 font-mono bg-yellow-50">
+    <ChakraProvider>
       <MenuProvider>
         <NavBar />
-        <Body />
+        <main className={styles}>
+            <Body />
+        </main>
       </MenuProvider>
-    </main>
+    </ChakraProvider>
   );
 }
