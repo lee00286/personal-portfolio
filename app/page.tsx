@@ -1,6 +1,6 @@
 import { ChakraProvider } from '@chakra-ui/react';
 import Body from '@/components/Body';
-import NavBar from '@/components/NavBar';
+import SidebarWithHeader from '@/components/SidebarWithHeader';
 import { MenuProvider } from '@/context/menuState';
 
 export const styles =
@@ -10,9 +10,10 @@ export default function Home() {
   return (
     <ChakraProvider>
       <MenuProvider>
-        <NavBar />
         <main className={styles}>
+          <SidebarWithHeader>
             <Body />
+          </SidebarWithHeader>
         </main>
       </MenuProvider>
     </ChakraProvider>
