@@ -40,6 +40,7 @@ interface LinkItemProps {
 
 interface NavItemProps extends FlexProps {
   icon: any;
+  navIndex: number;
   children: React.ReactNode;
 }
 
@@ -61,7 +62,7 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-  const { currentPage, setCurrentPage } = useMenuContext();
+  const { setCurrentPage } = useMenuContext();
 
   return (
     <Box
@@ -100,6 +101,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <NavItem
           key={link.name}
           icon={link.icon}
+          navIndex={index}
           onClick={() => setCurrentPage(index)}
         >
           {link.name}
@@ -109,7 +111,10 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
+  const { currentPage } = useMenuContext();
+  console.log(currentPage);
+
   return (
     <Box
       as="a"
@@ -124,8 +129,13 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
+        background={
+          currentPage === navIndex
+            ? useColorModeValue('yellow.300', 'gray.700')
+            : useColorModeValue('white', 'gray.900')
+        }
         _hover={{
-          background: 'yellow.300'
+          background: useColorModeValue('yellow.300', 'gray.700')
         }}
         {...rest}
       >

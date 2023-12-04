@@ -4,7 +4,7 @@ import SidebarWithHeader from '@/components/SidebarWithHeader';
 import { MenuProvider } from '@/context/menuState';
 
 export const styles =
-  'min-h-screen flex justify-center items-center lg:p-16 md:p-0 font-mono bg-yellow-50';
+  'min-h-screen flex justify-center items-center md:p-16 md:p-0 font-mono bg-yellow-50';
 
 export default function Home() {
   return (
