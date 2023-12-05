@@ -1,7 +1,7 @@
 'use client';
 
 import { useMenuContext } from '@/context/menuState';
-import Profile from '@/components/Profile/Profile';
+import Profile from '@/components/Page/Profile';
 
 function Body() {
   const { currentPage } = useMenuContext();
