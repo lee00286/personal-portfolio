@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { Children, ReactNode } from 'react';
 import {
   documentToReactComponents,
   NodeRenderer
@@ -9,15 +9,17 @@ import {
   BLOCKS,
   INLINES,
   Block,
-  Inline
+  Inline,
+  MARKS
 } from '@contentful/rich-text-types';
 
 import {
-  Box,
+  Code,
   Heading,
   Link,
   ListItem,
   OrderedList,
+  Tag,
   Tbody,
   Text,
   UnorderedList
@@ -119,5 +121,20 @@ export const renderContentfulRichText = (
         .split('\n')
         .reduce((children: ReactNode[], textSegment: string, index: number) => {
           return [...children, index > 0 && <br key={index} />, textSegment];
-        }, [])
+        }, []),
+    renderMark: {
+      [MARKS.CODE]: (text: ReactNode) => {
+        let flag = false;
+        Children.map(text, (child) => {
+          if (typeof child === 'string' && child.includes('#')) {
+            flag = true;
+          }
+        });
+        return flag ? (
+          <Tag colorScheme="yellow">{text}</Tag>
+        ) : (
+          <Code colorScheme="orange">{text}</Code>
+        );
+      }
+    }
   });
