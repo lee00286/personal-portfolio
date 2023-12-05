@@ -1,8 +1,51 @@
 import { NodeData } from '@contentful/rich-text-types';
 
+export type ContentfulPageSkeleton = {
+  contentTypeId: 'page';
+  fields: {
+    pageId: number;
+    slug: string;
+    emoji?: string;
+    title: string;
+    text?: NodeData;
+    codeBlock?: NodeData;
+    sections?: Array<NodeData>;
+    subPages?: Array<NodeData>;
+    lines?: Array<NodeData>;
+    media?: Array<NodeData>;
+  };
+};
+
+export type ContentfulSectionSkeleton = {
+  contentTypeId: 'section';
+  fields: {
+    sectionId: number;
+    slug: string;
+    emoji?: string;
+    title: string;
+    text?: NodeData;
+    codeBlock?: NodeData;
+    subPages?: Array<NodeData>;
+    lines?: Array<NodeData>;
+    media?: Array<NodeData>;
+    columnNum: number;
+    columns: Array<NodeData>;
+  };
+};
+
+export type ContentfulLineSkeleton = {
+  contentTypeId: 'line';
+  fields: {
+    lineId: number;
+    title: string;
+    text: NodeData;
+    date: string;
+    url?: string;
+    media?: Array<NodeData>;
+  };
+};
+
 export interface ContentfulPage {
-  fields: { slug: string };
-  contentTypeId: string;
   pageId: number;
   slug: string;
   emoji?: string;
@@ -32,8 +75,8 @@ export interface ContentfulSection {
 export interface ContentfulLine {
   lineId: number;
   title: string;
-  text: string;
-  date: string;
+  text: NodeData;
+  date?: string;
   url?: string;
   media?: Array<NodeData>;
 }

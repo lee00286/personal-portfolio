@@ -1,9 +1,9 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import getContentfulPage from '@/contentful/contentfulApi';
+import getContentfulPage from '@/contentful/getContentfulPage';
 import { ContentfulPage } from '@/contentful/types';
-import { contentfulPage } from '@/contentful/initial';
+import { contentfulPageInitial } from '@/contentful/initial';
 import { useMenuContext } from '@/context/menuState';
 
 interface IPageContext {
@@ -11,7 +11,7 @@ interface IPageContext {
 }
 
 const initialState: IPageContext = {
-  pageData: contentfulPage
+  pageData: contentfulPageInitial
 };
 
 export const PageContext = createContext(initialState);
@@ -20,7 +20,7 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
   const { currentPage } = useMenuContext();
 
   const [isFetching, setisFetching] = useState(true);
-  const [pageData, setPageData] = useState(contentfulPage);
+  const [pageData, setPageData] = useState(contentfulPageInitial);
 
   useEffect(() => {
     if (!isFetching) return;

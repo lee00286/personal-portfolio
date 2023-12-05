@@ -1,9 +1,13 @@
-import { ContentfulPage } from './types';
+import { ContentfulLine, ContentfulPage } from './types';
 
-export const contentfulPage: ContentfulPage = {
-  fields: { slug: 'page' },
-  contentTypeId: '',
+export const contentfulPageInitial: ContentfulPage = {
   pageId: 1,
   slug: 'profile',
   title: 'Profile'
+};
+
+export const contentfulLineInitial: ContentfulLine = {
+  lineId: 1,
+  title: '',
+  text: '' as any
 };
