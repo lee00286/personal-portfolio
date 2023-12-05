@@ -62,6 +62,8 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const borderColor = useColorModeValue('yellow.200', 'gray.500');
+  const bgColor = useColorModeValue('white', 'gray.900');
   const { setCurrentPage } = useMenuContext();
 
   return (
@@ -69,14 +71,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       pos="fixed"
       border={{ base: 0, md: '2px' }}
       borderRadius={{ base: 0, md: 'lg' }}
-      borderColor={{
-        md: useColorModeValue('yellow.300', 'gray.700')
-      }}
+      borderColor={{ md: borderColor }}
       paddingTop="4"
       paddingBottom="4"
       w={{ base: 'full', md: 60 }}
       h={{ base: 'full', md: 'auto' }}
-      bg={useColorModeValue('white', 'gray.900')}
+      bg={bgColor}
       transition="3s ease"
       {...rest}
     >
@@ -112,6 +112,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 };
 
 const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
+  const highlightedBgColor = useColorModeValue('yellow.300', 'gray.700');
+  const bgColor = useColorModeValue('white', 'gray.900');
   const { currentPage } = useMenuContext();
 
   return (
@@ -128,11 +130,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
-        background={
-          currentPage === navIndex
-            ? useColorModeValue('yellow.300', 'gray.700')
-            : useColorModeValue('white', 'gray.900')
-        }
+        background={currentPage === navIndex ? highlightedBgColor : bgColor}
         _hover={{
           background: useColorModeValue('yellow.300', 'gray.700')
         }}

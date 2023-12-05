@@ -7,17 +7,22 @@ import getContentfulLine from '@/contentful/getContentfulLine';
 import { contentfulLineInitial } from '@/contentful/initial';
 
 function Line({ lineId }: { lineId: string }) {
+  const borderColor = useColorModeValue('yellow.200', 'gray.500');
   const [lineData, setLineData] = useState(contentfulLineInitial);
+  const [isFetching, setIsFetching] = useState(true);
+
   const lineTitle: string = lineData?.title && lineData.title;
   const lineText =
     lineData?.text && renderContentfulRichText(lineData.text as Document);
 
   useEffect(() => {
     if (!lineId) return;
+    if (!isFetching) return;
     getContentfulLine(lineId).then((result) => {
       setLineData(result);
+      setIsFetching(false);
     });
-  }, [lineId]);
+  }, [lineId, isFetching]);
 
   return (
     <Box
@@ -39,7 +44,7 @@ function Line({ lineId }: { lineId: string }) {
         <Box
           border="1px"
           borderRadius="lg"
-          borderColor={useColorModeValue('yellow.200', 'gray.500')}
+          borderColor={borderColor}
           p="4"
           w="full"
         >

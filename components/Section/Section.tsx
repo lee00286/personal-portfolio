@@ -5,6 +5,8 @@ import { renderContentfulRichText } from '@/contentful/utils';
 import Line from '@/components/Line/Line';
 
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
+  const borderColor = useColorModeValue('yellow.200', 'gray.500');
+
   const sectionTitle: string = sectionData?.title && sectionData.title;
   const sectionText =
     sectionData?.text && renderContentfulRichText(sectionData.text as Document);
@@ -30,7 +32,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
         <Box
           border="1px"
           borderRadius="lg"
-          borderColor={useColorModeValue('yellow.200', 'gray.500')}
+          borderColor={borderColor}
           p="4"
           w="full"
         >
