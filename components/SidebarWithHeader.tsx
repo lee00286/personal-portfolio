@@ -113,7 +113,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 
 const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
   const { currentPage } = useMenuContext();
-  console.log(currentPage);
 
   return (
     <Box
