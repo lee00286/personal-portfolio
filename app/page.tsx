@@ -5,7 +5,7 @@ import { MenuProvider } from '@/context/menuState';
 import { PageProvider } from '@/context/pageState';
 
 export const styles =
-  'min-h-screen flex justify-center items-center md:p-16 md:p-0 font-mono bg-yellow-50';
+  'min-h-screen flex justify-center items-center md:p-16 md:p-0 font-mono bg-yellow-50 select-none';
 
 export default function Home() {
   return (

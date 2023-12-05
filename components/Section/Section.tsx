@@ -7,7 +7,8 @@ import Line from '@/components/Line/Line';
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
 
-  const sectionTitle: string = sectionData?.title && sectionData.title;
+  const sectionTitle: string =
+    sectionData?.isTitleVisible && sectionData.title ? sectionData.title : '';
   const sectionText =
     sectionData?.text && renderContentfulRichText(sectionData.text as Document);
   const sectionLines = sectionData?.lines && sectionData.lines;

@@ -7,6 +7,7 @@ export type ContentfulPageSkeleton = {
     slug: string;
     emoji?: string;
     title: string;
+    isTitleVisible: boolean;
     text?: NodeData;
     codeBlock?: NodeData;
     sections?: Array<NodeData>;
@@ -23,6 +24,7 @@ export type ContentfulSectionSkeleton = {
     slug: string;
     emoji?: string;
     title: string;
+    isTitleVisible: boolean;
     text?: NodeData;
     codeBlock?: NodeData;
     subPages?: Array<NodeData>;
@@ -38,6 +40,7 @@ export type ContentfulLineSkeleton = {
   fields: {
     lineId: number;
     title: string;
+    isTitleVisible: boolean;
     text: NodeData;
     date: string;
     url?: string;
@@ -50,6 +53,7 @@ export interface ContentfulPage {
   slug: string;
   emoji?: string;
   title: string;
+  isTitleVisible: boolean;
   text?: NodeData;
   codeBlock?: NodeData;
   sections?: Array<NodeData>;
@@ -63,6 +67,7 @@ export interface ContentfulSection {
   slug: string;
   emoji?: string;
   title: string;
+  isTitleVisible: boolean;
   text?: NodeData;
   codeBlock?: NodeData;
   subPages?: Array<NodeData>;
@@ -75,6 +80,7 @@ export interface ContentfulSection {
 export interface ContentfulLine {
   lineId: number;
   title: string;
+  isTitleVisible: boolean;
   text: NodeData;
   date?: string;
   url?: string;

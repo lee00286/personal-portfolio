@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Box, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
-import { ContentfulLine } from '@/contentful/types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import getContentfulLine from '@/contentful/getContentfulLine';
 import { contentfulLineInitial } from '@/contentful/initial';
@@ -11,7 +10,8 @@ function Line({ lineId }: { lineId: string }) {
   const [lineData, setLineData] = useState(contentfulLineInitial);
   const [isFetching, setIsFetching] = useState(true);
 
-  const lineTitle: string = lineData?.title && lineData.title;
+  const lineTitle: string =
+    lineData?.isTitleVisible && lineData.title ? lineData.title : '';
   const lineText =
     lineData?.text && renderContentfulRichText(lineData.text as Document);
 
@@ -30,8 +30,8 @@ function Line({ lineId }: { lineId: string }) {
       flexDirection="column"
       justifyContent="center"
       alignItems="flex-start"
-      mt="4"
-      mb="4"
+      mt="2"
+      mb="2"
       w="full"
       fontFamily="sans-serif"
     >
