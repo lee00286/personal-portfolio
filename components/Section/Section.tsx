@@ -2,6 +2,7 @@ import { Box, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { ContentfulSection } from '@/contentful/types';
 import { renderContentfulRichText } from '@/contentful/utils';
+import Date from '@/components/Date/Date';
 import Line from '@/components/Line/Line';
 
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
@@ -12,6 +13,10 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const sectionText =
     sectionData?.text && renderContentfulRichText(sectionData.text as Document);
   const sectionLines = sectionData?.lines && sectionData.lines;
+  const sectionStartDate = sectionData?.startDate && sectionData.startDate;
+  const sectionEndDate = sectionData?.endDate && sectionData.endDate;
+
+  // TODO: SUBPAGE LINK
 
   return (
     <Box
@@ -28,6 +33,9 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
         <Heading as="h2" size="lg" mb="2">
           {sectionTitle}
         </Heading>
+      )}
+      {sectionStartDate && (
+        <Date startDate={sectionStartDate} endDate={sectionEndDate} />
       )}
       {sectionText && (
         <Box

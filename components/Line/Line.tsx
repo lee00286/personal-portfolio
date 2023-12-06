@@ -4,6 +4,7 @@ import { Document } from '@contentful/rich-text-types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import getContentfulLine from '@/contentful/getContentfulLine';
 import { contentfulLineInitial } from '@/contentful/initial';
+import Date from '@/components/Date/Date';
 
 function Line({ lineId }: { lineId: string }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
@@ -14,6 +15,8 @@ function Line({ lineId }: { lineId: string }) {
     lineData?.isTitleVisible && lineData.title ? lineData.title : '';
   const lineText =
     lineData?.text && renderContentfulRichText(lineData.text as Document);
+  const lineStartDate = lineData?.startDate && lineData.startDate;
+  const lineEndDate = lineData?.endDate && lineData.endDate;
 
   useEffect(() => {
     if (!lineId) return;
@@ -39,6 +42,9 @@ function Line({ lineId }: { lineId: string }) {
         <Heading as="h3" size="md" mb="2">
           {lineTitle}
         </Heading>
+      )}
+      {lineStartDate && (
+        <Date startDate={lineStartDate} endDate={lineEndDate} />
       )}
       {lineText && (
         <Box

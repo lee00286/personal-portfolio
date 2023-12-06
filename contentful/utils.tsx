@@ -109,7 +109,11 @@ export const renderContentfulRichText = (
       [INLINES.HYPERLINK]: (
         node: RichInlineNodeType,
         children: ReactNode
-      ): ReactNode => <Link href={node.data.uri}>{children}</Link>,
+      ): ReactNode => (
+        <Link href={node.data.uri} color="teal.500">
+          {children}
+        </Link>
+      ),
       ...richTextOptions
     },
     renderText: (text: string) =>
