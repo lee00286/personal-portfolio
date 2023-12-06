@@ -27,7 +27,7 @@ export type ContentfulSectionSkeleton = {
     isTitleVisible: boolean;
     startDate?: string;
     endDate?: string;
-    location?: NodeData;
+    location?: string;
     text?: NodeData;
     codeBlock?: NodeData;
     subPages?: Array<NodeData>;
@@ -46,7 +46,7 @@ export type ContentfulLineSkeleton = {
     isTitleVisible: boolean;
     startDate?: string;
     endDate?: string;
-    location?: NodeData;
+    location?: string;
     text: NodeData;
     url?: string;
     media?: Array<NodeData>;
@@ -75,7 +75,7 @@ export interface ContentfulSection {
   isTitleVisible: boolean;
   startDate?: string;
   endDate?: string;
-  location?: NodeData;
+  location?: string;
   text?: NodeData;
   codeBlock?: NodeData;
   subPages?: Array<NodeData>;
@@ -91,7 +91,7 @@ export interface ContentfulLine {
   isTitleVisible: boolean;
   startDate?: string;
   endDate?: string;
-  location?: NodeData;
+  location?: string;
   text: NodeData;
   url?: string;
   media?: Array<NodeData>;

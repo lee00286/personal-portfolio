@@ -1,14 +1,8 @@
 import React from 'react';
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
-import { CalendarDaysIcon } from '@heroicons/react/24/outline';
+import { MapPinIcon } from '@heroicons/react/24/outline';
 
-function Date({
-  startDate,
-  endDate
-}: {
-  startDate: string;
-  endDate: string | undefined;
-}) {
+function Location({ location }: { location: string }) {
   const bgColor = useColorModeValue('yellow.100', 'gray.400');
 
   return (
@@ -16,7 +10,7 @@ function Date({
       justify="flex-start"
       align="center"
       gap="1"
-      mb={{ base: '2', md: '4' }}
+      mb="4"
       pt="1"
       pb="1"
       pl="2"
@@ -25,13 +19,11 @@ function Date({
       backgroundColor={bgColor}
     >
       <Box width="4">
-        <CalendarDaysIcon />
+        <MapPinIcon />
       </Box>
-      <Text fontSize="xs">
-        {startDate} {endDate && `~ ${endDate}`}
-      </Text>
+      <Text fontSize="xs">{location}</Text>
     </Flex>
   );
 }
 
-export default Date;
+export default Location;

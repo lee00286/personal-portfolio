@@ -1,9 +1,10 @@
-import { Box, Heading, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { ContentfulSection } from '@/contentful/types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import Date from '@/components/Date/Date';
 import Line from '@/components/Line/Line';
+import Location from '@/components/Location/Location';
 
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
@@ -15,6 +16,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const sectionLines = sectionData?.lines && sectionData.lines;
   const sectionStartDate = sectionData?.startDate && sectionData.startDate;
   const sectionEndDate = sectionData?.endDate && sectionData.endDate;
+  const sectionLocation = sectionData?.location && sectionData.location;
 
   // TODO: SUBPAGE LINK
 
@@ -34,8 +36,13 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
           {sectionTitle}
         </Heading>
       )}
-      {sectionStartDate && (
-        <Date startDate={sectionStartDate} endDate={sectionEndDate} />
+      {(sectionStartDate || sectionLocation) && (
+        <Flex gap={{ md: '2' }} direction={{ base: 'column', md: 'row' }}>
+          {sectionStartDate && (
+            <Date startDate={sectionStartDate} endDate={sectionEndDate} />
+          )}
+          {sectionLocation && <Location location={sectionLocation} />}
+        </Flex>
       )}
       {sectionText && (
         <Box
