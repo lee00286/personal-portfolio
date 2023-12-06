@@ -89,19 +89,15 @@ export const renderContentfulRichText = (
       [BLOCKS.OL_LIST]: (
         node: RichBlockNodeType,
         children: ReactNode
-      ): ReactNode => (
-        <OrderedList>
-          <ListItem>{children}</ListItem>
-        </OrderedList>
-      ),
+      ): ReactNode => <OrderedList>{children}</OrderedList>,
       [BLOCKS.UL_LIST]: (
         node: RichBlockNodeType,
         children: ReactNode
-      ): ReactNode => (
-        <UnorderedList>
-          <ListItem>{children}</ListItem>
-        </UnorderedList>
-      ),
+      ): ReactNode => <UnorderedList>{children}</UnorderedList>,
+      [BLOCKS.LIST_ITEM]: (
+        node: RichBlockNodeType,
+        children: ReactNode
+      ): ReactNode => <ListItem>{children}</ListItem>,
       [BLOCKS.TABLE]: (
         node: RichBlockNodeType,
         children: ReactNode
