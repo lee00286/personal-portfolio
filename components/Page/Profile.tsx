@@ -24,7 +24,7 @@ function Profile() {
       fontFamily="sans-serif"
     >
       {pageTitle && (
-        <Heading as="h1" size="2xl" mb="4">
+        <Heading as="h1" size="2xl" mb="4" fontFamily="Menlo">
           {pageTitle}
         </Heading>
       )}

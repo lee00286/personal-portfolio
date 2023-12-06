@@ -32,7 +32,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
       fontFamily="sans-serif"
     >
       {sectionTitle && (
-        <Heading as="h2" size="lg" mb="2">
+        <Heading as="h2" size="md" fontWeight="bold" mb="2" fontFamily="Menlo">
           {sectionTitle}
         </Heading>
       )}
