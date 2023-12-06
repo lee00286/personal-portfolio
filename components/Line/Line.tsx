@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Box, Heading, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import getContentfulLine from '@/contentful/getContentfulLine';
 import { contentfulLineInitial } from '@/contentful/initial';
 import Date from '@/components/Date/Date';
+import Location from '@/components/Location/Location';
 
 function Line({ lineId }: { lineId: string }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
@@ -17,6 +18,7 @@ function Line({ lineId }: { lineId: string }) {
     lineData?.text && renderContentfulRichText(lineData.text as Document);
   const lineStartDate = lineData?.startDate && lineData.startDate;
   const lineEndDate = lineData?.endDate && lineData.endDate;
+  const lineLocation = lineData?.location && lineData.location;
 
   useEffect(() => {
     if (!lineId) return;
@@ -45,6 +47,14 @@ function Line({ lineId }: { lineId: string }) {
       )}
       {lineStartDate && (
         <Date startDate={lineStartDate} endDate={lineEndDate} />
+      )}
+      {(lineStartDate || lineLocation) && (
+        <Flex gap={{ md: '2' }} direction={{ base: 'column', md: 'row' }}>
+          {lineStartDate && (
+            <Date startDate={lineStartDate} endDate={lineEndDate} />
+          )}
+          {lineLocation && <Location location={lineLocation} />}
+        </Flex>
       )}
       {lineText && (
         <Box
