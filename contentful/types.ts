@@ -25,6 +25,9 @@ export type ContentfulSectionSkeleton = {
     emoji?: string;
     title: string;
     isTitleVisible: boolean;
+    startDate?: string;
+    endDate?: string;
+    location?: NodeData;
     text?: NodeData;
     codeBlock?: NodeData;
     subPages?: Array<NodeData>;
@@ -41,8 +44,10 @@ export type ContentfulLineSkeleton = {
     lineId: number;
     title: string;
     isTitleVisible: boolean;
+    startDate?: string;
+    endDate?: string;
+    location?: NodeData;
     text: NodeData;
-    date: string;
     url?: string;
     media?: Array<NodeData>;
   };
@@ -68,6 +73,9 @@ export interface ContentfulSection {
   emoji?: string;
   title: string;
   isTitleVisible: boolean;
+  startDate?: string;
+  endDate?: string;
+  location?: NodeData;
   text?: NodeData;
   codeBlock?: NodeData;
   subPages?: Array<NodeData>;
@@ -81,8 +89,10 @@ export interface ContentfulLine {
   lineId: number;
   title: string;
   isTitleVisible: boolean;
+  startDate?: string;
+  endDate?: string;
+  location?: NodeData;
   text: NodeData;
-  date?: string;
   url?: string;
   media?: Array<NodeData>;
 }

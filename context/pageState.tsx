@@ -21,9 +21,11 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
 
   const [isFetching, setisFetching] = useState(true);
   const [pageData, setPageData] = useState(contentfulPageInitial);
+  const [page, setPage] = useState(currentPage);
 
   useEffect(() => {
-    if (!isFetching) return;
+    if (currentPage === page && !isFetching) return;
+    setisFetching(true);
 
     let slug: string = 'profile';
     if (currentPage === 0) slug = 'profile';
@@ -35,6 +37,7 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
 
     getContentfulPage(slug).then((result) => {
       setPageData(result);
+      setPage(currentPage);
       setisFetching(false);
     });
   }, [isFetching, currentPage]);
