@@ -2,6 +2,7 @@ import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { ContentfulSection } from '@/contentful/types';
 import { renderContentfulRichText } from '@/contentful/utils';
+import Assets from '@/components/Assets/Assets';
 import Date from '@/components/Date/Date';
 import Line from '@/components/Line/Line';
 import Location from '@/components/Location/Location';
@@ -22,6 +23,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const sectionEndDate = sectionData?.endDate && sectionData.endDate;
   const sectionLocation = sectionData?.location && sectionData.location;
   const sectionSubPages = sectionData?.subPages && sectionData.subPages;
+  const sectionMedia = sectionData?.media && sectionData.media;
 
   return (
     <Box
@@ -81,6 +83,9 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
             pageId={page.sys.id}
           />
         ))}
+      {sectionMedia && sectionMedia.length > 0 && (
+        <Assets assets={sectionMedia} />
+      )}
     </Box>
   );
 }

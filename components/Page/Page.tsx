@@ -5,6 +5,7 @@ import { Box, Flex, Heading } from '@chakra-ui/react';
 import { renderContentfulRichText } from '@/contentful/utils';
 import { Document } from '@contentful/rich-text-types';
 import { usePageContext } from '@/context/pageState';
+import Assets from '@/components/Assets/Assets';
 import Section from '@/components/Section/Section';
 import { pathnameToSlug } from '@/utils/pageUtils';
 
@@ -22,6 +23,7 @@ function Page() {
   const pageText =
     pageData?.text && renderContentfulRichText(pageData.text as Document);
   const pageSections = pageData?.sections && pageData.sections;
+  const pageMedia = pageData?.media && pageData.media;
 
   return (
     <Box
@@ -51,6 +53,7 @@ function Page() {
         pageSections.map((section, index: number) => (
           <Section key={`${slug}-page-${index}`} sectionData={section.fields} />
         ))}
+      {pageMedia && pageMedia.length > 0 && <Assets assets={pageMedia} />}
     </Box>
   );
 }

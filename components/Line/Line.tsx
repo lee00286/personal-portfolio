@@ -3,6 +3,7 @@
 import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { renderContentfulRichText } from '@/contentful/utils';
+import Assets from '@/components/Assets/Assets';
 import Date from '@/components/Date/Date';
 import Location from '@/components/Location/Location';
 import useContentfulLine from '@/contentful/hooks/useContentfulLine';
@@ -21,6 +22,7 @@ function Line({ lineId }: { lineId: string }) {
   const lineStartDate = lineData?.startDate && lineData.startDate;
   const lineEndDate = lineData?.endDate && lineData.endDate;
   const lineLocation = lineData?.location && lineData.location;
+  const lineMedia = lineData?.media && lineData.media;
 
   return (
     <Box
@@ -58,6 +60,7 @@ function Line({ lineId }: { lineId: string }) {
           {lineText}
         </Box>
       )}
+      {lineMedia && lineMedia.length > 0 && <Assets assets={lineMedia} />}
     </Box>
   );
 }
