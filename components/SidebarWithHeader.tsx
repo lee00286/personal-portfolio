@@ -21,7 +21,8 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Image
+  Image,
+  Center
 } from '@chakra-ui/react';
 import {
   AcademicCapIcon,
@@ -73,30 +74,21 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       border={{ base: 0, md: '2px' }}
       borderRadius={{ base: 0, md: 'lg' }}
       borderColor={{ md: borderColor }}
-      paddingTop="4"
-      paddingBottom="4"
+      pt="4"
+      pb="4"
       w={{ base: 'full', md: 60 }}
       h={{ base: 'full', md: 'auto' }}
       bg={bgColor}
       transition="3s ease"
       {...rest}
     >
-      <Flex
-        justifyContent="center"
-        alignItems="center"
-        h="20"
-        mx="8"
-        marginBottom="2"
-      >
+      <Center h="20" mx="8" mb="2">
         <Image
           boxSize="50px"
           src="/logo-icon.gif"
           alt="Logo icon for the page - Duck Emoji"
         />
-        {/* <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Yena Lee
-        </Text> */}
-      </Flex>
+      </Center>
       <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       {LinkItems.map((link, index) => (
         <NavItem
@@ -130,12 +122,14 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
     >
       <Flex
         align="center"
-        p="4"
         mx="4"
+        my="2"
         borderRadius="lg"
+        px="4"
+        py="2"
         role="group"
         cursor="pointer"
-        background={isCurrPage ? highlightedBgColor : bgColor}
+        bg={isCurrPage ? highlightedBgColor : bgColor}
         _hover={{ background: hoverBgColor }}
         {...rest}
       >
@@ -171,7 +165,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         base: useColorModeValue('yellow.300', 'gray.700'),
         md: useColorModeValue('yellow.300', 'gray.700')
       }}
-      height="20"
+      h="20"
       bg={useColorModeValue('white', 'gray.900')}
       {...rest}
     >
@@ -182,23 +176,12 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<ChevronDownIcon />}
       />
-
       <Image
         display={{ base: 'flex', md: 'none' }}
         boxSize="50px"
         src="/logo-icon.gif"
         alt="Logo icon for the page - Duck Emoji"
       />
-
-      {/* <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold"
-      >
-        Yena Lee
-      </Text> */}
-
       <HStack spacing={{ base: '0', md: '6' }}>
         {/* <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} /> */}
         <Flex alignItems={'center'}>

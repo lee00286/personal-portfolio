@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { Center, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 import { CalendarDaysIcon } from '@heroicons/react/24/outline';
 
 function Date({
@@ -17,16 +17,14 @@ function Date({
       align="center"
       gap="1"
       mb={{ base: '2', md: '4' }}
-      pt="1"
-      pb="1"
-      pl="2"
-      pr="2"
       borderRadius="lg"
+      px="2"
+      py="1"
       backgroundColor={bgColor}
     >
-      <Box width="4">
+      <Center width="4">
         <CalendarDaysIcon />
-      </Box>
+      </Center>
       <Text fontSize="xs">
         {startDate} {endDate && `~ ${endDate}`}
       </Text>

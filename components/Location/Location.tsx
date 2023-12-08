@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import { Center, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
 
 function Location({ location }: { location: string }) {
@@ -11,16 +11,14 @@ function Location({ location }: { location: string }) {
       align="center"
       gap="1"
       mb="4"
-      pt="1"
-      pb="1"
-      pl="2"
-      pr="2"
       borderRadius="lg"
+      px="2"
+      py="1"
       backgroundColor={bgColor}
     >
-      <Box width="4">
+      <Center width="4">
         <MapPinIcon />
-      </Box>
+      </Center>
       <Text fontSize="xs">{location}</Text>
     </Flex>
   );
