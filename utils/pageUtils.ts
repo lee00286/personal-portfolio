@@ -17,3 +17,14 @@ export const slugToIndex = (slug: string): number => {
   if (slug === 'awardsAndCertification') return 5;
   return -1;
 };
+
+export const pathnameToSlug = (pathname: string, isParam = false): string => {
+  if (!pathname) return '';
+  const splitPathname: string[] = pathname.split('/');
+  if (isParam) {
+    for (let path of splitPathname) {
+      if (path !== '') return path;
+    }
+  }
+  return splitPathname[1];
+};

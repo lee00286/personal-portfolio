@@ -32,7 +32,7 @@ import {
   TrophyIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
-import { indexToSlug, slugToIndex } from '@/utils/pageUtils';
+import { indexToSlug, pathnameToSlug, slugToIndex } from '@/utils/pageUtils';
 
 interface LinkItemProps {
   name: string;
@@ -119,9 +119,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
   const bgColor = useColorModeValue('white', 'gray.900');
   const hoverBgColor = useColorModeValue('yellow.300', 'gray.700');
 
-  const splitPathname: string[] = pathname ? pathname.split('/') : [];
-  const isCurrPage =
-    splitPathname.length > 1 && slugToIndex(splitPathname[1]) === navIndex;
+  const isCurrPage = slugToIndex(pathnameToSlug(pathname)) === navIndex;
 
   return (
     <Box

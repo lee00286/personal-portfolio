@@ -1,10 +1,11 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import getContentfulPage from '@/contentful/getContentfulPage';
 import { ContentfulPage } from '@/contentful/types';
 import { contentfulPageInitial } from '@/contentful/initial';
+import { pathnameToSlug } from '@/utils/pageUtils';
 
 interface IPageContext {
   pageData: ContentfulPage;
@@ -26,8 +27,7 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    const slug: string =
-      pathname && pathname.length > 0 ? pathname.slice(1) : '';
+    const slug: string = pathnameToSlug(pathname, true);
 
     if (slug === page && !isFetching) return;
     setisFetching(true);
