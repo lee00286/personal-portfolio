@@ -1,7 +1,7 @@
 import PageMain from '@/components/PageMain';
 import Page from '@/components/Page/Page';
 
-function AwardsAndCertification() {
+function AwardsAndCertificates() {
   return (
     <PageMain>
       <Page />
@@ -9,4 +9,4 @@ function AwardsAndCertification() {
   );
 }
 
-export default AwardsAndCertification;
+export default AwardsAndCertificates;

@@ -4,7 +4,7 @@ export const indexToSlug = (index: number): string => {
   if (index === 2) return 'professional-experiences';
   if (index === 3) return 'other-experiences';
   if (index === 4) return 'extracurricular-activities';
-  if (index === 5) return 'awards-and-certification';
+  if (index === 5) return 'awards-and-certificates';
   return '';
 };
 
@@ -14,7 +14,7 @@ export const slugToIndex = (slug: string): number => {
   if (slug === 'professional-experiences') return 2;
   if (slug === 'other-experiences') return 3;
   if (slug === 'extracurricular-activities') return 4;
-  if (slug === 'awards-and-certification') return 5;
+  if (slug === 'awards-and-certificates') return 5;
   return -1;
 };
 
