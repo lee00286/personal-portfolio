@@ -14,6 +14,8 @@ function Page() {
 
   const slug: string = pathnameToSlug(pathname, true);
 
+  if (!pageData || pageData.pageId < 0) return <Box></Box>;
+
   const pageEmoji: string = pageData.emoji ? pageData.emoji : '';
   const pageTitle: string =
     pageData?.isTitleVisible && pageData.title ? pageData.title : '';

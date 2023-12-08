@@ -1,21 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
-import {
-  convertEntryToContentfulLine,
-  renderContentfulRichText
-} from '@/contentful/utils';
-import getContentfulEntry from '@/contentful/getContentfulEntry';
-import { contentfulLineInitial } from '@/contentful/initial';
+import { renderContentfulRichText } from '@/contentful/utils';
 import Date from '@/components/Date/Date';
 import Location from '@/components/Location/Location';
+import useContentfulLine from '@/contentful/hooks/useContentfulLine';
 
 function Line({ lineId }: { lineId: string }) {
+  const lineData = useContentfulLine(lineId);
+
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
-  const [lineData, setLineData] = useState(contentfulLineInitial);
-  const [isFetching, setIsFetching] = useState(true);
+
+  if (!lineData || lineData.lineId < 0) return <Box></Box>;
 
   const lineTitle: string =
     lineData?.isTitleVisible && lineData.title ? lineData.title : '';
@@ -24,16 +21,6 @@ function Line({ lineId }: { lineId: string }) {
   const lineStartDate = lineData?.startDate && lineData.startDate;
   const lineEndDate = lineData?.endDate && lineData.endDate;
   const lineLocation = lineData?.location && lineData.location;
-
-  useEffect(() => {
-    if (!lineId) return;
-    if (!isFetching) return;
-    getContentfulEntry(lineId).then((result) => {
-      const contentfulResult = convertEntryToContentfulLine(result);
-      if (contentfulResult !== null) setLineData(contentfulResult);
-      setIsFetching(false);
-    });
-  }, [lineId, isFetching]);
 
   return (
     <Box

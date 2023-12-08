@@ -10,6 +10,8 @@ import LinkToPage from '@/components/SubPage/LinkToPage';
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
 
+  if (!sectionData) return <Box></Box>;
+
   const sectionEmoji: string = sectionData.emoji ? sectionData.emoji : '';
   const sectionTitle: string =
     sectionData?.isTitleVisible && sectionData.title ? sectionData.title : '';

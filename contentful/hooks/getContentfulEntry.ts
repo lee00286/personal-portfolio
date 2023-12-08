@@ -1,4 +1,4 @@
-import contentfulApi from './contentfulApi';
+import contentfulApi from '@/contentful/contentfulApi';
 
 const getContentfulEntry = async (id: string) => {
   try {
