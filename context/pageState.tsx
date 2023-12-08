@@ -1,10 +1,10 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { createContext, useContext, useEffect, useState } from 'react';
 import getContentfulPage from '@/contentful/getContentfulPage';
 import { ContentfulPage } from '@/contentful/types';
 import { contentfulPageInitial } from '@/contentful/initial';
-import { useMenuContext } from '@/context/menuState';
 
 interface IPageContext {
   pageData: ContentfulPage;
@@ -17,30 +17,27 @@ const initialState: IPageContext = {
 export const PageContext = createContext(initialState);
 
 export function PageProvider({ children }: { children: React.ReactNode }) {
-  const { currentPage } = useMenuContext();
+  const pathname = usePathname();
 
   const [isFetching, setisFetching] = useState(true);
   const [pageData, setPageData] = useState(contentfulPageInitial);
-  const [page, setPage] = useState(currentPage);
+  const [page, setPage] = useState(
+    pathname && pathname.length > 0 ? pathname.slice(1) : ''
+  );
 
   useEffect(() => {
-    if (currentPage === page && !isFetching) return;
-    setisFetching(true);
+    const slug: string =
+      pathname && pathname.length > 0 ? pathname.slice(1) : '';
 
-    let slug: string = 'profile';
-    if (currentPage === 0) slug = 'profile';
-    else if (currentPage === 1) slug = 'education';
-    else if (currentPage === 2) slug = 'professionalExperiences';
-    else if (currentPage === 3) slug = 'otherExperiences';
-    else if (currentPage === 4) slug = 'extracurricularActivities';
-    else if (currentPage === 5) slug = 'awardsAndCertification';
+    if (slug === page && !isFetching) return;
+    setisFetching(true);
 
     getContentfulPage(slug).then((result) => {
       setPageData(result);
-      setPage(currentPage);
+      setPage(slug);
       setisFetching(false);
     });
-  }, [isFetching, currentPage]);
+  }, [isFetching, pathname]);
 
   return (
     <PageContext.Provider value={{ pageData }}>{children}</PageContext.Provider>

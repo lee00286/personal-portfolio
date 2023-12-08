@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';

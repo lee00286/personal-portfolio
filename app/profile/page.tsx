@@ -1,10 +1,12 @@
 import PageMain from '@/components/PageMain';
 import ProfileBody from '@/components/PageBody/ProfileBody';
 
-export default function Home() {
+function Profile() {
   return (
     <PageMain>
       <ProfileBody />
     </PageMain>
   );
 }
+
+export default Profile;

@@ -1,10 +1,12 @@
+'use client';
+
 import { Box, Heading } from '@chakra-ui/react';
 import { renderContentfulRichText } from '@/contentful/utils';
 import { Document } from '@contentful/rich-text-types';
 import { usePageContext } from '@/context/pageState';
 import Section from '@/components/Section/Section';
 
-function Education() {
+function ProfileBody() {
   const { pageData } = usePageContext();
 
   const pageTitle: string =
@@ -41,4 +43,4 @@ function Education() {
   );
 }
 
-export default Education;
+export default ProfileBody;

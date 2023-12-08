@@ -1,6 +1,6 @@
 'use client';
 
-import { useMenuContext } from '@/context/menuState';
+import { useRouter, usePathname } from 'next/navigation';
 import {
   IconButton,
   Box,
@@ -32,6 +32,7 @@ import {
   TrophyIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
+import { indexToSlug, slugToIndex } from '@/utils/pageUtils';
 
 interface LinkItemProps {
   name: string;
@@ -62,9 +63,9 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { push } = useRouter();
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
   const bgColor = useColorModeValue('white', 'gray.900');
-  const { setCurrentPage } = useMenuContext();
 
   return (
     <Box
@@ -102,7 +103,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           key={link.name}
           icon={link.icon}
           navIndex={index}
-          onClick={() => setCurrentPage(index)}
+          onClick={() => push(`/${indexToSlug(index)}`)}
         >
           {link.name}
         </NavItem>
@@ -112,9 +113,15 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 };
 
 const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
+  const pathname = usePathname();
+
   const highlightedBgColor = useColorModeValue('yellow.300', 'gray.700');
   const bgColor = useColorModeValue('white', 'gray.900');
-  const { currentPage } = useMenuContext();
+  const hoverBgColor = useColorModeValue('yellow.300', 'gray.700');
+
+  const splitPathname: string[] = pathname ? pathname.split('/') : [];
+  const isCurrPage =
+    splitPathname.length > 1 && slugToIndex(splitPathname[1]) === navIndex;
 
   return (
     <Box
@@ -130,10 +137,8 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
         borderRadius="lg"
         role="group"
         cursor="pointer"
-        background={currentPage === navIndex ? highlightedBgColor : bgColor}
-        _hover={{
-          background: useColorModeValue('yellow.300', 'gray.700')
-        }}
+        background={isCurrPage ? highlightedBgColor : bgColor}
+        _hover={{ background: hoverBgColor }}
         {...rest}
       >
         {icon && (
