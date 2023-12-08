@@ -35,12 +35,9 @@ function Line({ lineId }: { lineId: string }) {
       _last={{ mb: '0' }}
     >
       {lineTitle && (
-        <Heading as="h3" size="md" mb="2">
+        <Heading as="h3" size="sm" fontFamily="Menlo" mr="2" mb="2">
           {lineTitle}
         </Heading>
-      )}
-      {lineStartDate && (
-        <Date startDate={lineStartDate} endDate={lineEndDate} />
       )}
       {(lineStartDate || lineLocation) && (
         <Flex gap={{ md: '2' }} direction={{ base: 'column', md: 'row' }}>
