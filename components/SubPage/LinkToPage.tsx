@@ -22,7 +22,6 @@ function LinkToPage({ pageId }: { pageId: string }) {
     getContentfulEntry(pageId).then((result) => {
       const contentfulResult = convertEntryToContentfulPage(result);
       if (contentfulResult !== null) setPageData(contentfulResult);
-      console.log(contentfulResult);
       setIsFetching(false);
     });
   }, [pageId, isFetching]);

@@ -87,7 +87,11 @@ export const renderContentfulRichText = (
       [BLOCKS.PARAGRAPH]: (
         node: RichBlockNodeType,
         children: ReactNode
-      ): ReactNode => <Text>{children}</Text>,
+      ): ReactNode => (
+        <Text mb="4" _last={{ mb: '0' }}>
+          {children}
+        </Text>
+      ),
       [BLOCKS.OL_LIST]: (
         node: RichBlockNodeType,
         children: ReactNode
@@ -112,7 +116,7 @@ export const renderContentfulRichText = (
         node: RichInlineNodeType,
         children: ReactNode
       ): ReactNode => (
-        <Link href={node.data.uri} color="teal.500">
+        <Link href={node.data.uri} color="teal.500" isExternal>
           {children}
         </Link>
       ),

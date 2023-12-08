@@ -6,8 +6,10 @@ import { Document } from '@contentful/rich-text-types';
 import { usePageContext } from '@/context/pageState';
 import Section from '@/components/Section/Section';
 
-function EducationBody() {
+function RelevantCoursesBody() {
   const { pageData } = usePageContext();
+
+  console.log(pageData);
 
   const pageTitle: string =
     pageData?.isTitleVisible && pageData.title ? pageData.title : '';
@@ -35,7 +37,7 @@ function EducationBody() {
         pageSections.length > 0 &&
         pageSections.map((section, index: number) => (
           <Section
-            key={`education-section-${index}`}
+            key={`relevant-courses-section-${index}`}
             sectionData={section.fields}
           />
         ))}
@@ -43,4 +45,4 @@ function EducationBody() {
   );
 }
 
-export default EducationBody;
+export default RelevantCoursesBody;

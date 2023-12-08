@@ -22,8 +22,8 @@ export const pathnameToSlug = (pathname: string, isParam = false): string => {
   if (!pathname) return '';
   const splitPathname: string[] = pathname.split('/');
   if (isParam) {
-    for (let path of splitPathname) {
-      if (path !== '') return path;
+    for (let i = splitPathname.length - 1; i >= 0; i--) {
+      if (splitPathname[i] !== '') return splitPathname[i];
     }
   }
   return splitPathname[1];

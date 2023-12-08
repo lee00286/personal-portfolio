@@ -45,6 +45,7 @@ function Line({ lineId }: { lineId: string }) {
       mb="2"
       w="full"
       fontFamily="sans-serif"
+      _last={{ mb: '0' }}
     >
       {lineTitle && (
         <Heading as="h3" size="md" mb="2">
