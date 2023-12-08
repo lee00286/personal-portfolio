@@ -10,6 +10,7 @@ import LinkToPage from '@/components/SubPage/LinkToPage';
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
 
+  const sectionEmoji: string = sectionData.emoji ? sectionData.emoji : '';
   const sectionTitle: string =
     sectionData?.isTitleVisible && sectionData.title ? sectionData.title : '';
   const sectionText =
@@ -31,10 +32,17 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
       w="full"
       fontFamily="sans-serif"
     >
-      {sectionTitle && (
-        <Heading as="h2" size="md" fontWeight="bold" mb="2" fontFamily="Menlo">
-          {sectionTitle}
-        </Heading>
+      {(sectionEmoji || sectionTitle) && (
+        <Flex mb="2">
+          {sectionEmoji && (
+            <Heading as="h2" size="md" fontFamily="Menlo" mr="2">
+              {sectionEmoji}
+            </Heading>
+          )}
+          <Heading as="h2" size="md" fontWeight="bold" fontFamily="Menlo">
+            {sectionTitle}
+          </Heading>
+        </Flex>
       )}
       {(sectionStartDate || sectionLocation) && (
         <Flex gap={{ md: '2' }} direction={{ base: 'column', md: 'row' }}>

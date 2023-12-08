@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading } from '@chakra-ui/react';
 import { renderContentfulRichText } from '@/contentful/utils';
 import { Document } from '@contentful/rich-text-types';
 import { usePageContext } from '@/context/pageState';
@@ -9,8 +9,7 @@ import Section from '@/components/Section/Section';
 function RelevantCoursesBody() {
   const { pageData } = usePageContext();
 
-  console.log(pageData);
-
+  const pageEmoji: string = pageData.emoji ? pageData.emoji : '';
   const pageTitle: string =
     pageData?.isTitleVisible && pageData.title ? pageData.title : '';
   const pageText =
@@ -27,11 +26,17 @@ function RelevantCoursesBody() {
       w="full"
       fontFamily="sans-serif"
     >
-      {pageTitle && (
-        <Heading as="h1" size="2xl" mb="4" fontFamily="Menlo">
-          {pageTitle}
-        </Heading>
+      {(pageEmoji || pageTitle) && (
+        <Flex mb="4">
+          <Heading as="h1" size="2xl" mr="4" fontFamily="Menlo">
+            {pageEmoji}
+          </Heading>
+          <Heading as="h1" size="2xl" fontFamily="Menlo">
+            {pageTitle}
+          </Heading>
+        </Flex>
       )}
+
       <Box>{pageText}</Box>
       {pageSections &&
         pageSections.length > 0 &&
