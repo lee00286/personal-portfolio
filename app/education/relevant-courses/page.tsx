@@ -1,10 +1,10 @@
 import PageMain from '@/components/PageMain';
-import RelevantCoursesBody from '@/components/PageBody/RelevantCoursesBody';
+import Page from '@/components/Page/Page';
 
 function RelevantCourses() {
   return (
     <PageMain>
-      <RelevantCoursesBody />
+      <Page />
     </PageMain>
   );
 }

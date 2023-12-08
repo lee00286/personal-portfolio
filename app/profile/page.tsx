@@ -1,10 +1,10 @@
 import PageMain from '@/components/PageMain';
-import ProfileBody from '@/components/PageBody/ProfileBody';
+import Page from '@/components/Page/Page';
 
 function Profile() {
   return (
     <PageMain>
-      <ProfileBody />
+      <Page />
     </PageMain>
   );
 }

@@ -1,13 +1,18 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { renderContentfulRichText } from '@/contentful/utils';
 import { Document } from '@contentful/rich-text-types';
 import { usePageContext } from '@/context/pageState';
 import Section from '@/components/Section/Section';
+import { pathnameToSlug } from '@/utils/pageUtils';
 
-function EducationBody() {
+function Page() {
   const { pageData } = usePageContext();
+  const pathname = usePathname();
+
+  const slug: string = pathnameToSlug(pathname, true);
 
   const pageEmoji: string = pageData.emoji ? pageData.emoji : '';
   const pageTitle: string =
@@ -42,13 +47,10 @@ function EducationBody() {
       {pageSections &&
         pageSections.length > 0 &&
         pageSections.map((section, index: number) => (
-          <Section
-            key={`education-section-${index}`}
-            sectionData={section.fields}
-          />
+          <Section key={`${slug}-page-${index}`} sectionData={section.fields} />
         ))}
     </Box>
   );
 }
 
-export default EducationBody;
+export default Page;

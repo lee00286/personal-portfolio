@@ -1,10 +1,10 @@
 import PageMain from '@/components/PageMain';
-import EducationBody from '@/components/PageBody/EducationBody';
+import Page from '@/components/Page/Page';
 
 function Education() {
   return (
     <PageMain>
-      <EducationBody />
+      <Page />
     </PageMain>
   );
 }
