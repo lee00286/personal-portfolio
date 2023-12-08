@@ -3,8 +3,11 @@
 import { useEffect, useState } from 'react';
 import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
-import { renderContentfulRichText } from '@/contentful/utils';
-import getContentfulLine from '@/contentful/getContentfulLine';
+import {
+  convertEntryToContentfulLine,
+  renderContentfulRichText
+} from '@/contentful/utils';
+import getContentfulEntry from '@/contentful/getContentfulEntry';
 import { contentfulLineInitial } from '@/contentful/initial';
 import Date from '@/components/Date/Date';
 import Location from '@/components/Location/Location';
@@ -25,8 +28,9 @@ function Line({ lineId }: { lineId: string }) {
   useEffect(() => {
     if (!lineId) return;
     if (!isFetching) return;
-    getContentfulLine(lineId).then((result) => {
-      setLineData(result);
+    getContentfulEntry(lineId).then((result) => {
+      const contentfulResult = convertEntryToContentfulLine(result);
+      if (contentfulResult !== null) setLineData(contentfulResult);
       setIsFetching(false);
     });
   }, [lineId, isFetching]);

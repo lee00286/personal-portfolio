@@ -24,6 +24,8 @@ import {
   Text,
   UnorderedList
 } from '@chakra-ui/react';
+import { ContentfulLine, ContentfulPage } from './types';
+import { contentfulLineInitial, contentfulPageInitial } from './initial';
 
 type RichBlockNodeType = Block | Inline | { nodeType: string };
 type RichInlineNodeType = Block | Inline;
@@ -138,3 +140,61 @@ export const renderContentfulRichText = (
       }
     }
   });
+
+export const convertEntryToContentfulPage = (
+  entry: any
+): ContentfulPage | null => {
+  let contentfulPage: ContentfulPage = contentfulPageInitial;
+
+  if (
+    entry?.pageId &&
+    entry.slug &&
+    entry.title &&
+    entry.isTitleVisible !== undefined
+  ) {
+    contentfulPage.pageId = entry.pageId;
+    contentfulPage.slug = entry.slug;
+    contentfulPage.title = entry.title;
+    contentfulPage.isTitleVisible = entry.isTitleVisible;
+  } else {
+    return null;
+  }
+
+  if (entry.emoji) contentfulPage.emoji = entry.emoji;
+  if (entry.text) contentfulPage.text = entry.text;
+  if (entry.codeBlock) contentfulPage.codeBlock = entry.codeBlock;
+  if (entry.sections) contentfulPage.sections = entry.sections;
+  if (entry.subPages) contentfulPage.subPages = entry.subPages;
+  if (entry.lines) contentfulPage.subPages = entry.lines;
+  if (entry.media) contentfulPage.media = entry.media;
+
+  return contentfulPage;
+};
+
+export const convertEntryToContentfulLine = (
+  entry: any
+): ContentfulLine | null => {
+  let contentfulLine: ContentfulLine = contentfulLineInitial;
+
+  if (
+    entry?.lineId &&
+    entry.title &&
+    entry.isTitleVisible !== undefined &&
+    entry?.text
+  ) {
+    contentfulLine.lineId = entry.lineId;
+    contentfulLine.title = entry.title;
+    contentfulLine.isTitleVisible = entry.isTitleVisible;
+    contentfulLine.text = entry.text;
+  } else {
+    return null;
+  }
+
+  if (entry.startDate) contentfulLine.startDate = entry.startDate;
+  if (entry.endDate) contentfulLine.endDate = entry.endDate;
+  if (entry.location) contentfulLine.location = entry.location;
+  if (entry.url) contentfulLine.url = entry.url;
+  if (entry.media) contentfulLine.media = entry.media;
+
+  return contentfulLine;
+};
