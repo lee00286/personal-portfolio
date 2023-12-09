@@ -22,7 +22,8 @@ import {
   MenuItem,
   MenuList,
   Image,
-  Center
+  Center,
+  Link
 } from '@chakra-ui/react';
 import {
   AcademicCapIcon,
@@ -150,6 +151,11 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { push } = useRouter();
+
+  const linkedInUrl = process.env.NEXT_PUBLIC_PROFILE_LINKEDIN || '';
+  const gitHubUrl = process.env.NEXT_PUBLIC_PROFILE_GITHUB || '';
+
   return (
     <Flex
       ml={{ base: 0, md: 64 }}
@@ -212,10 +218,18 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
+              <MenuItem onClick={() => push('/profile')}>Profile</MenuItem>
               <MenuDivider />
-              <MenuItem>LinkedIn</MenuItem>
+              <MenuItem>
+                <Link href={linkedInUrl} w="full" isExternal>
+                  LinkedIn
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link href={gitHubUrl} w="full" isExternal>
+                  GitHub
+                </Link>
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
