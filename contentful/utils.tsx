@@ -184,7 +184,7 @@ export const convertEntryToContentfulLine = (
     entry?.lineId &&
     entry.title &&
     entry.isTitleVisible !== undefined &&
-    entry?.text
+    entry.text
   ) {
     contentfulLine.lineId = entry.lineId;
     contentfulLine.title = entry.title;

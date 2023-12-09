@@ -6,14 +6,12 @@ import { renderContentfulRichText } from '@/contentful/utils';
 import Assets from '@/components/Assets/Assets';
 import Date from '@/components/Date/Date';
 import Location from '@/components/Location/Location';
-import useContentfulLine from '@/contentful/hooks/useContentfulLine';
+import { ContentfulLine } from '@/contentful/types';
 
-function Line({ lineId }: { lineId: string }) {
-  const lineData = useContentfulLine(lineId);
-
+function Line({ lineData }: { lineData: ContentfulLine }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
 
-  if (!lineData || lineData.lineId < 0) return <Box></Box>;
+  if (!lineData) return <Box></Box>;
 
   const lineTitle: string =
     lineData?.isTitleVisible && lineData.title ? lineData.title : '';

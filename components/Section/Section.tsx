@@ -72,7 +72,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
         sectionLines.map((line, index: number) => (
           <Line
             key={`section-${sectionData.sectionId}-line-${index}`}
-            lineId={line.sys.id}
+            lineData={line.fields}
           />
         ))}
       {sectionSubPages &&

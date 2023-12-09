@@ -5,6 +5,7 @@ const getContentfulPage = async (slug: string): Promise<ContentfulPage> => {
   try {
     const contentfulClient = contentfulApi();
     const result = await contentfulClient.getEntries<ContentfulPageSkeleton>({
+      include: 2,
       content_type: 'page',
       'fields.slug': slug
     });
