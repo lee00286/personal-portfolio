@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     follow: false,
     nocache: true,
     googleBot: {
-      index: true,
+      index: false,
       follow: false,
       noimageindex: true,
       'max-video-preview': -1,
