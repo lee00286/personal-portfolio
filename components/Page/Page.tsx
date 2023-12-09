@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { Box, Center, Flex, Heading, Spinner } from '@chakra-ui/react';
 import { renderContentfulRichText } from '@/contentful/utils';
 import { Document } from '@contentful/rich-text-types';
 import { usePageContext } from '@/context/pageState';
@@ -15,7 +15,12 @@ function Page() {
 
   const slug: string = pathnameToSlug(pathname, true);
 
-  if (!pageData || pageData.pageId < 0) return <Box></Box>;
+  if (!pageData || pageData.pageId < 0)
+    return (
+      <Center p="4" w="full">
+        <Spinner color="yellow.500" />
+      </Center>
+    );
 
   const pageEmoji: string = pageData.emoji ? pageData.emoji : '';
   const pageTitle: string =

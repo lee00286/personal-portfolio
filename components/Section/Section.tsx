@@ -1,4 +1,11 @@
-import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  Spinner,
+  useColorModeValue
+} from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { ContentfulSection } from '@/contentful/types';
 import { renderContentfulRichText } from '@/contentful/utils';
@@ -11,7 +18,12 @@ import LinkToPage from '@/components/SubPage/LinkToPage';
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
 
-  if (!sectionData) return <Box></Box>;
+  if (!sectionData)
+    return (
+      <Center my="4" w="full">
+        <Spinner color="yellow.500" />
+      </Center>
+    );
 
   const sectionEmoji: string = sectionData.emoji ? sectionData.emoji : '';
   const sectionTitle: string =
@@ -31,8 +43,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
       flexDirection="column"
       justifyContent="center"
       alignItems="flex-start"
-      mt="4"
-      mb="4"
+      my="4"
       w="full"
       fontFamily="sans-serif"
     >

@@ -6,6 +6,7 @@ import {
   Center,
   Image,
   Link,
+  Spinner,
   Text,
   useColorModeValue
 } from '@chakra-ui/react';
@@ -18,13 +19,17 @@ function Asset({ assetId }: { assetId: string }) {
   const borderColor = useColorModeValue('gray.50', 'gray.300');
   const hoverBgColor = useColorModeValue('gray.50', 'gray.300');
 
-  if (!assetId) return <Box></Box>;
   if (
+    !assetId ||
     !linkData?.extension ||
     !linkData?.alt ||
     !linkData?.media?.fields?.file?.url
   )
-    return <Box></Box>;
+    return (
+      <Center borderRadius="lg" p="4" bgColor={borderColor}>
+        <Spinner color="yellow.500" />
+      </Center>
+    );
 
   const assetUrl = `https:${linkData.media.fields.file.url}`;
 

@@ -1,6 +1,13 @@
 'use client';
 
-import { Box, Flex, Heading, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Center,
+  Flex,
+  Heading,
+  Spinner,
+  useColorModeValue
+} from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import Assets from '@/components/Assets/Assets';
@@ -11,7 +18,12 @@ import { ContentfulLine } from '@/contentful/types';
 function Line({ lineData }: { lineData: ContentfulLine }) {
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
 
-  if (!lineData) return <Box></Box>;
+  if (!lineData)
+    return (
+      <Center my="4" w="full" _last={{ mb: '0' }}>
+        <Spinner color="yellow.500" />
+      </Center>
+    );
 
   const lineTitle: string =
     lineData?.isTitleVisible && lineData.title ? lineData.title : '';
@@ -28,8 +40,7 @@ function Line({ lineData }: { lineData: ContentfulLine }) {
       flexDirection="column"
       justifyContent="center"
       alignItems="flex-start"
-      mt="2"
-      mb="2"
+      my="2"
       w="full"
       fontFamily="sans-serif"
       _last={{ mb: '0' }}
