@@ -41,13 +41,18 @@ function Page() {
       fontFamily="sans-serif"
     >
       {(pageEmoji || pageTitle) && (
-        <Flex mb="4">
+        <Flex flexDir={{ base: 'column', md: 'row' }} mb="4">
           {pageEmoji && (
-            <Heading as="h1" size="2xl" mr="4" fontFamily="Menlo">
+            <Heading
+              as="h1"
+              size={{ base: 'xl', md: '2xl' }}
+              mr="4"
+              fontFamily="Menlo"
+            >
               {pageEmoji}
             </Heading>
           )}
-          <Heading as="h1" size="2xl" fontFamily="Menlo">
+          <Heading as="h1" size={{ base: 'xl', md: '2xl' }} fontFamily="Menlo">
             {pageTitle}
           </Heading>
         </Flex>

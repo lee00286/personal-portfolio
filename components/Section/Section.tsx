@@ -48,7 +48,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
       fontFamily="sans-serif"
     >
       {(sectionEmoji || sectionTitle) && (
-        <Flex mb="2">
+        <Flex flexDir={{ base: 'column', md: 'row' }} mb="2">
           {sectionEmoji && (
             <Heading as="h2" size="md" fontFamily="Menlo" mr="2">
               {sectionEmoji}
