@@ -1,10 +1,9 @@
-import { ContentfulPage, ContentfulPageSkeleton } from '@/contentful/types';
 import contentfulApi from './contentfulApi';
 
-const getContentfulPage = async (slug: string): Promise<ContentfulPage> => {
+const getContentfulPage = async (slug: string) => {
   try {
     const contentfulClient = contentfulApi();
-    const result = await contentfulClient.getEntries<ContentfulPageSkeleton>({
+    const result = await contentfulClient.getEntries({
       include: 2,
       content_type: 'page',
       'fields.slug': slug

@@ -21,7 +21,7 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const [isFetching, setisFetching] = useState(true);
-  const [pageData, setPageData] = useState(contentfulPageInitial);
+  const [pageData, setPageData]: any = useState(contentfulPageInitial);
   const [page, setPage] = useState(pathnameToSlug(pathname, true));
 
   useEffect(() => {

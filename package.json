@@ -1,5 +1,6 @@
 {
-  "name": "personal-portfolio",
+  "homepage": "https://lee00286.github.io/portfolio",
+  "name": "portfolio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint -- --fix --ext .mjs,.js,.ts,.jsx,.tsx,.css,.json",
-    "format": "prettier --write --config .prettierrc '**/*.{mjs,js,ts,jsx,tsx,css,json}' '!.next'"
+    "format": "prettier --write --config .prettierrc '**/*.{mjs,js,ts,jsx,tsx,css,json}' '!.next'",
+    "deploy": "next build && git commit -m 'deploy to gh-pages' && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",

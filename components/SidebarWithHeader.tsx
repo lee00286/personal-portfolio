@@ -34,6 +34,7 @@ import {
   TrophyIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
+import { useDeployContext } from '@/context/deployContext';
 import { indexToSlug, pathnameToSlug, slugToIndex } from '@/utils/pageUtils';
 
 interface LinkItemProps {
@@ -65,6 +66,7 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { prefix } = useDeployContext();
   const { push } = useRouter();
   const borderColor = useColorModeValue('yellow.200', 'gray.500');
   const bgColor = useColorModeValue('white', 'gray.900');
@@ -86,7 +88,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       <Center h="20" mx="8" mb="2">
         <Image
           boxSize="50px"
-          src="/logo-icon.gif"
+          src={`${prefix}/logo-icon.gif`}
           alt="Logo icon for the page - Duck Emoji"
         />
       </Center>
@@ -151,6 +153,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { prefix } = useDeployContext();
   const { push } = useRouter();
 
   const linkedInUrl = process.env.NEXT_PUBLIC_PROFILE_LINKEDIN || '';
@@ -185,7 +188,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       <Image
         display={{ base: 'flex', md: 'none' }}
         boxSize="50px"
-        src="/logo-icon.gif"
+        src={`${prefix}/logo-icon.gif`}
         alt="Logo icon for the page - Duck Emoji"
       />
       <HStack spacing={{ base: '0', md: '6' }}>

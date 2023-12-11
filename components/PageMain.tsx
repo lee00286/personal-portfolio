@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { DeployProvider } from '@/context/deployContext';
 import { PageProvider } from '@/context/pageState';
 import SidebarWithHeader from '@/components/SidebarWithHeader';
 
@@ -9,11 +10,13 @@ export const styles =
 function PageMain({ children }: { children: React.ReactNode }) {
   return (
     <ChakraProvider>
-      <PageProvider>
-        <main className={styles}>
-          <SidebarWithHeader>{children}</SidebarWithHeader>
-        </main>
-      </PageProvider>
+      <DeployProvider>
+        <PageProvider>
+          <main className={styles}>
+            <SidebarWithHeader>{children}</SidebarWithHeader>
+          </main>
+        </PageProvider>
+      </DeployProvider>
     </ChakraProvider>
   );
 }
