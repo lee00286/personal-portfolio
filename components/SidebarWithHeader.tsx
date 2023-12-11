@@ -37,6 +37,9 @@ import {
 import { useDeployContext } from '@/context/deployContext';
 import { indexToSlug, pathnameToSlug, slugToIndex } from '@/utils/pageUtils';
 
+const debug = process.env.NODE_ENV !== 'production';
+const repository = 'portfolio';
+
 interface LinkItemProps {
   name: string;
   icon: any;
@@ -98,7 +101,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           key={link.name}
           icon={link.icon}
           navIndex={index}
-          onClick={() => push(`/${indexToSlug(index)}`)}
+          onClick={() => push(`${!debug ? `/${repository}` : ""}/${indexToSlug(index)}`)}
         >
           {link.name}
         </NavItem>
@@ -221,7 +224,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              <MenuItem onClick={() => push('/profile')}>Profile</MenuItem>
+              <MenuItem onClick={() => push(`${!debug ? `/${repository}` : ""}/profile`)}>Profile</MenuItem>
               <MenuDivider />
               <MenuItem>
                 <Link href={linkedInUrl} w="full" isExternal>
