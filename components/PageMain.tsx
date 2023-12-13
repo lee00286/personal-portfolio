@@ -1,13 +1,16 @@
+'use client';
+
 import React from 'react';
-import { ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider, useColorModeValue } from '@chakra-ui/react';
 import { DeployProvider } from '@/context/deployContext';
 import { PageProvider } from '@/context/pageState';
 import SidebarWithHeader from '@/components/SidebarWithHeader';
 
-export const styles =
-  'min-h-screen flex justify-center items-center md:p-16 md:p-0 font-mono bg-yellow-50 select-none';
-
 function PageMain({ children }: { children: React.ReactNode }) {
+  const bgColor = useColorModeValue('yellow.50', 'gray.900');
+
+  const styles = `min-h-screen flex justify-center items-center md:p-16 md:p-0 font-mono ${bgColor} select-none`;
+
   return (
     <ChakraProvider>
       <DeployProvider>

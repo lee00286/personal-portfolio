@@ -11,8 +11,8 @@ function LinkToPage({ pageId }: { pageId: string }) {
 
   const pageData = useContentfulPage(pageId);
 
-  const borderColor = useColorModeValue('gray.200', 'gray.500');
-  const hoverBgColor = useColorModeValue('gray.200', 'gray.500');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
+  const hoverBgColor = useColorModeValue('gray.200', 'gray.600');
 
   return pageData ? (
     <Link

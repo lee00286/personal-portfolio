@@ -23,7 +23,8 @@ import {
   MenuList,
   Image,
   Center,
-  Link
+  Link,
+  useColorMode
 } from '@chakra-ui/react';
 import {
   AcademicCapIcon,
@@ -101,7 +102,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           key={link.name}
           icon={link.icon}
           navIndex={index}
-          onClick={() => push(`${!debug ? `/${repository}` : ""}/${indexToSlug(index)}`)}
+          onClick={() =>
+            push(`${!debug ? `/${repository}` : ''}/${indexToSlug(index)}`)
+          }
         >
           {link.name}
         </NavItem>
@@ -158,6 +161,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { prefix } = useDeployContext();
   const { push } = useRouter();
+  const { toggleColorMode } = useColorMode();
 
   const linkedInUrl = process.env.NEXT_PUBLIC_PROFILE_LINKEDIN || '';
   const gitHubUrl = process.env.NEXT_PUBLIC_PROFILE_GITHUB || '';
@@ -224,8 +228,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              <MenuItem onClick={() => push(`${!debug ? `/${repository}` : ""}/profile`)}>Profile</MenuItem>
-              <MenuDivider />
+              <MenuItem
+                onClick={() =>
+                  push(`${!debug ? `/${repository}` : ''}/profile`)
+                }
+              >
+                Profile
+              </MenuItem>
               <MenuItem>
                 <Link href={linkedInUrl} w="full" isExternal>
                   LinkedIn
@@ -236,6 +245,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   GitHub
                 </Link>
               </MenuItem>
+              <MenuDivider />
+              <MenuItem onClick={toggleColorMode}>Switch Color Mode</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

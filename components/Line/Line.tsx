@@ -40,7 +40,7 @@ function Line({ lineData }: { lineData: ContentfulLine }) {
       flexDirection="column"
       justifyContent="center"
       alignItems="flex-start"
-      my="2"
+      my="4"
       w="full"
       fontFamily="sans-serif"
       _last={{ mb: '0' }}

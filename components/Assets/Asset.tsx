@@ -16,8 +16,8 @@ import { LinkIcon } from '@heroicons/react/24/outline';
 function Asset({ assetId }: { assetId: string }) {
   const linkData = useContentfulLink(assetId);
 
-  const borderColor = useColorModeValue('gray.50', 'gray.300');
-  const hoverBgColor = useColorModeValue('gray.50', 'gray.300');
+  const borderColor = useColorModeValue('gray.50', 'gray.400');
+  const hoverBgColor = useColorModeValue('gray.50', 'gray.400');
 
   if (
     !assetId ||

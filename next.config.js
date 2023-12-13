@@ -6,7 +6,7 @@ const repository = 'portfolio';
 const nextConfig = {
   assetPrefix: !debug ? `/${repository}/` : '',
   trailingSlash: true,
-  output: 'export',
+  output: 'export'
 };
 
 module.exports = nextConfig;

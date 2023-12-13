@@ -9,7 +9,7 @@ function Date({
   startDate: string;
   endDate: string | undefined;
 }) {
-  const bgColor = useColorModeValue('yellow.100', 'gray.400');
+  const bgColor = useColorModeValue('yellow.100', 'gray.600');
 
   return (
     <Flex
