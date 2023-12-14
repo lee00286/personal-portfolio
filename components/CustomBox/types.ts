@@ -26,7 +26,7 @@ export interface IMenuItemBox extends MenuItemProps {
 }
 
 export interface INavBox extends BoxProps {
-  variant?: 'current' | 'mobile' | 'body' | undefined;
+  variant?: 'default' | 'current' | 'mobile' | 'body' | undefined;
 }
 
 export interface ISidebarBox extends BoxProps {

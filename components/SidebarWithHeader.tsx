@@ -114,7 +114,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}
     >
-      <NavBox variant={isCurrPage ? 'current' : undefined} {...rest}>
+      <NavBox variant={isCurrPage ? 'current' : 'default'} {...rest}>
         {icon && (
           <Icon
             mr="4"

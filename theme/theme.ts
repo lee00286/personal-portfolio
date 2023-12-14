@@ -94,12 +94,15 @@ const components = {
       py: '2',
       role: 'group',
       cursor: 'pointer',
-      bgColor: mode('body.light', 'body.dark')(props),
-      _hover: { bgColor: mode('nav.light', 'nav.dark')(props) }
+      bgColor: mode('body.light', 'body.dark')(props)
     }),
     variants: {
+      default: (props: StyleFunctionProps) => ({
+        _hover: { bgColor: mode('nav.light', 'nav.dark')(props) }
+      }),
       current: (props: StyleFunctionProps) => ({
-        bgColor: mode('nav.light', 'nav.dark')(props)
+        bgColor: mode('nav.light', 'nav.dark')(props),
+        _hover: { bgColor: mode('nav.light', 'nav.dark')(props) }
       }),
       mobile: (props: StyleFunctionProps) => ({
         justifyContent: { base: 'space-between', md: 'flex-end' },
@@ -117,8 +120,7 @@ const components = {
           md: mode('border.light', 'border.dark')(props)
         },
         h: '20',
-        cursor: 'auto',
-        _hover: 'none'
+        cursor: 'auto'
       }),
       body: (props: StyleFunctionProps) => ({
         flexDir: 'column',
@@ -134,8 +136,7 @@ const components = {
           md: mode('border.light', 'border.dark')(props)
         },
         py: '4',
-        cursor: 'auto',
-        _hover: 'none'
+        cursor: 'auto'
       })
     }
   },
