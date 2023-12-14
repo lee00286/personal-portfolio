@@ -7,8 +7,8 @@ import ContainerBox from '@/components/CustomBox/ContainerBox';
 import ContentBox from '@/components/CustomBox/ContentBox';
 import HeadingBox from '@/components/CustomBox/HeadingBox';
 import IconTagBox from '@/components/CustomBox/IconTagBox';
-import Line from '@/components/Line/Line';
-import LinkToPage from '@/components/SubPage/LinkToPage';
+import Line from '@/components/Line';
+import LinkToPage from '@/components/LinkToPage';
 import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 
 function Section({ sectionData }: { sectionData: ContentfulSection }) {

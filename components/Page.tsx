@@ -8,7 +8,7 @@ import { usePageContext } from '@/context/pageState';
 import Assets from '@/components/Assets/Assets';
 import ContainerBox from '@/components/CustomBox/ContainerBox';
 import HeadingBox from '@/components/CustomBox/HeadingBox';
-import Section from '@/components/Section/Section';
+import Section from '@/components/Section';
 import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 import { pathnameToSlug } from '@/utils/pageUtils';
 
