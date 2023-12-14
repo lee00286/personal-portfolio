@@ -1,29 +1,18 @@
-import {
-  Box,
-  Center,
-  Flex,
-  Heading,
-  Spinner,
-  useColorModeValue
-} from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { ContentfulSection } from '@/contentful/types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import Assets from '@/components/Assets/Assets';
-import Date from '@/components/Date/Date';
+import ContainerBox from '@/components/CustomBox/ContainerBox';
+import ContentBox from '@/components/CustomBox/ContentBox';
+import HeadingBox from '@/components/CustomBox/HeadingBox';
+import IconTagBox from '@/components/CustomBox/IconTagBox';
 import Line from '@/components/Line/Line';
-import Location from '@/components/Location/Location';
 import LinkToPage from '@/components/SubPage/LinkToPage';
+import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 
 function Section({ sectionData }: { sectionData: ContentfulSection }) {
-  const borderColor = useColorModeValue('yellow.200', 'gray.500');
-
-  if (!sectionData)
-    return (
-      <Center my="4" w="full">
-        <Spinner color="yellow.500" />
-      </Center>
-    );
+  if (!sectionData) return <SpinnerBox />;
 
   const sectionEmoji: string = sectionData.emoji ? sectionData.emoji : '';
   const sectionTitle: string =
@@ -38,46 +27,30 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
   const sectionMedia = sectionData?.media && sectionData.media;
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="flex-start"
-      my="4"
-      w="full"
-      fontFamily="sans-serif"
-    >
+    <ContainerBox variant="section">
       {(sectionEmoji || sectionTitle) && (
-        <Flex flexDir={{ base: 'column', md: 'row' }} mb="2">
-          {sectionEmoji && (
-            <Heading as="h2" size="md" fontFamily="Menlo" mr="2">
-              {sectionEmoji}
-            </Heading>
-          )}
-          <Heading as="h2" size="md" fontWeight="bold" fontFamily="Menlo">
-            {sectionTitle}
-          </Heading>
-        </Flex>
+        <HeadingBox
+          variant="section"
+          emoji={sectionEmoji}
+          title={sectionTitle}
+        />
       )}
       {(sectionStartDate || sectionLocation) && (
         <Flex gap={{ md: '2' }} direction={{ base: 'column', md: 'row' }}>
           {sectionStartDate && (
-            <Date startDate={sectionStartDate} endDate={sectionEndDate} />
+            <IconTagBox
+              variant="date"
+              text={`${sectionStartDate}${
+                sectionEndDate ? ` ~ ${sectionEndDate}` : ''
+              }`}
+            />
           )}
-          {sectionLocation && <Location location={sectionLocation} />}
+          {sectionLocation && (
+            <IconTagBox variant="location" text={sectionLocation} />
+          )}
         </Flex>
       )}
-      {sectionText && (
-        <Box
-          border="1px"
-          borderRadius="lg"
-          borderColor={borderColor}
-          p="4"
-          w="full"
-        >
-          {sectionText}
-        </Box>
-      )}
+      {sectionText && <ContentBox>{sectionText}</ContentBox>}
       {sectionLines &&
         sectionLines.length > 0 &&
         sectionLines.map((line, index: number) => (
@@ -97,7 +70,7 @@ function Section({ sectionData }: { sectionData: ContentfulSection }) {
       {sectionMedia && sectionMedia.length > 0 && (
         <Assets assets={sectionMedia} />
       )}
-    </Box>
+    </ContainerBox>
   );
 }
 

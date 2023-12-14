@@ -2,17 +2,14 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { Center, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Center, Link, Text, useColorModeValue } from '@chakra-ui/react';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import useContentfulPage from '@/contentful/hooks/useContentfulPage';
 
 function LinkToPage({ pageId }: { pageId: string }) {
   const pathname = usePathname();
-
   const pageData = useContentfulPage(pageId);
-
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
-  const hoverBgColor = useColorModeValue('gray.200', 'gray.600');
+  const assetColor = useColorModeValue('assetBg.light', 'assetBg.dark');
 
   return pageData ? (
     <Link
@@ -23,10 +20,10 @@ function LinkToPage({ pageId }: { pageId: string }) {
       alignContent="center"
       border="1px"
       borderRadius="lg"
-      borderColor={borderColor}
+      borderColor={assetColor}
       p="4"
       w="full"
-      _hover={{ background: hoverBgColor }}
+      _hover={{ background: assetColor }}
     >
       <Center mr="2" width="4">
         <LinkIcon />
@@ -34,7 +31,7 @@ function LinkToPage({ pageId }: { pageId: string }) {
       <Text>{pageData.title}</Text>
     </Link>
   ) : (
-    <div></div>
+    <Box></Box>
   );
 }
 

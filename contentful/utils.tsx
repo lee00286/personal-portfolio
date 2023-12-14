@@ -116,7 +116,7 @@ export const renderContentfulRichText = (
         node: RichInlineNodeType,
         children: ReactNode
       ): ReactNode => (
-        <Link href={node.data.uri} color="teal.500" isExternal>
+        <Link href={node.data.uri} color="link.light" isExternal>
           {children}
         </Link>
       ),

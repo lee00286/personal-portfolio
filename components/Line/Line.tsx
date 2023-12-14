@@ -1,29 +1,15 @@
-'use client';
-
-import {
-  Box,
-  Center,
-  Flex,
-  Heading,
-  Spinner,
-  useColorModeValue
-} from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 import { Document } from '@contentful/rich-text-types';
 import { renderContentfulRichText } from '@/contentful/utils';
 import Assets from '@/components/Assets/Assets';
-import Date from '@/components/Date/Date';
-import Location from '@/components/Location/Location';
+import ContainerBox from '@/components/CustomBox/ContainerBox';
+import ContentBox from '@/components/CustomBox/ContentBox';
+import IconTagBox from '@/components/CustomBox/IconTagBox';
+import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 import { ContentfulLine } from '@/contentful/types';
 
 function Line({ lineData }: { lineData: ContentfulLine }) {
-  const borderColor = useColorModeValue('yellow.200', 'gray.500');
-
-  if (!lineData)
-    return (
-      <Center my="4" w="full" _last={{ mb: '0' }}>
-        <Spinner color="yellow.500" />
-      </Center>
-    );
+  if (!lineData) return <SpinnerBox variant="line" />;
 
   const lineTitle: string =
     lineData?.isTitleVisible && lineData.title ? lineData.title : '';
@@ -35,42 +21,24 @@ function Line({ lineData }: { lineData: ContentfulLine }) {
   const lineMedia = lineData?.media && lineData.media;
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="flex-start"
-      my="4"
-      w="full"
-      fontFamily="sans-serif"
-      _last={{ mb: '0' }}
-    >
-      {lineTitle && (
-        <Heading as="h3" size="sm" fontFamily="Menlo" mr="2" mb="2">
-          {lineTitle}
-        </Heading>
-      )}
+    <ContainerBox variant="line">
+      {lineTitle && <Heading variant="line">{lineTitle}</Heading>}
       {(lineStartDate || lineLocation) && (
         <Flex gap={{ md: '2' }} direction={{ base: 'column', md: 'row' }}>
           {lineStartDate && (
-            <Date startDate={lineStartDate} endDate={lineEndDate} />
+            <IconTagBox
+              variant="date"
+              text={`${lineStartDate}${lineEndDate ? ` ~ ${lineEndDate}` : ''}`}
+            />
           )}
-          {lineLocation && <Location location={lineLocation} />}
+          {lineLocation && (
+            <IconTagBox variant="location" text={lineLocation} />
+          )}
         </Flex>
       )}
-      {lineText && (
-        <Box
-          border="1px"
-          borderRadius="lg"
-          borderColor={borderColor}
-          p="4"
-          w="full"
-        >
-          {lineText}
-        </Box>
-      )}
+      {lineText && <ContentBox>{lineText}</ContentBox>}
       {lineMedia && lineMedia.length > 0 && <Assets assets={lineMedia} />}
-    </Box>
+    </ContainerBox>
   );
 }
 

@@ -1,23 +1,14 @@
 'use client';
 
 import React from 'react';
-import {
-  Box,
-  Center,
-  Image,
-  Link,
-  Spinner,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react';
+import { Center, Image, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 import useContentfulLink from '@/contentful/hooks/useContentfulLink';
 import { LinkIcon } from '@heroicons/react/24/outline';
 
 function Asset({ assetId }: { assetId: string }) {
   const linkData = useContentfulLink(assetId);
-
-  const borderColor = useColorModeValue('gray.50', 'gray.400');
-  const hoverBgColor = useColorModeValue('gray.50', 'gray.400');
+  const assetColor = useColorModeValue('asset.light', 'asset.dark');
 
   if (
     !assetId ||
@@ -25,11 +16,7 @@ function Asset({ assetId }: { assetId: string }) {
     !linkData?.alt ||
     !linkData?.media?.fields?.file?.url
   )
-    return (
-      <Center borderRadius="lg" p="4" bgColor={borderColor}>
-        <Spinner color="yellow.500" />
-      </Center>
-    );
+    return <SpinnerBox variant="asset" />;
 
   const assetUrl = `https:${linkData.media.fields.file.url}`;
 
@@ -42,9 +29,9 @@ function Asset({ assetId }: { assetId: string }) {
         alignContent="center"
         border="1px"
         borderRadius="lg"
-        borderColor={borderColor}
+        borderColor={assetColor}
         p="4"
-        _hover={{ background: hoverBgColor }}
+        _hover={{ background: assetColor }}
         isExternal
       >
         <Center mr="2" width="4">

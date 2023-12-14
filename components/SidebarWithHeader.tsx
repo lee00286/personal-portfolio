@@ -19,7 +19,6 @@ import {
   Menu,
   MenuButton,
   MenuDivider,
-  MenuItem,
   MenuList,
   Image,
   Center,
@@ -37,6 +36,9 @@ import {
 } from '@heroicons/react/24/outline';
 import { useDeployContext } from '@/context/deployContext';
 import { indexToSlug, pathnameToSlug, slugToIndex } from '@/utils/pageUtils';
+import MenuItemBox from './CustomBox/MenuItemBox';
+import NavBox from './CustomBox/NavBox';
+import SidebarBox from './CustomBox/SidebarBox';
 
 const debug = process.env.NODE_ENV !== 'production';
 const repository = 'portfolio';
@@ -72,23 +74,9 @@ const LinkItems: Array<LinkItemProps> = [
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { prefix } = useDeployContext();
   const { push } = useRouter();
-  const borderColor = useColorModeValue('yellow.200', 'gray.500');
-  const bgColor = useColorModeValue('white', 'gray.900');
 
   return (
-    <Box
-      pos="fixed"
-      border={{ base: 0, md: '2px' }}
-      borderRadius={{ base: 0, md: 'lg' }}
-      borderColor={{ md: borderColor }}
-      pt="4"
-      pb="4"
-      w={{ base: 'full', md: 60 }}
-      h={{ base: 'full', md: 'auto' }}
-      bg={bgColor}
-      transition="3s ease"
-      {...rest}
-    >
+    <SidebarBox {...rest}>
       <Center h="20" mx="8" mb="2">
         <Image
           boxSize="50px"
@@ -109,18 +97,15 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
-    </Box>
+    </SidebarBox>
   );
 };
 
 const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
   const pathname = usePathname();
 
-  const highlightedBgColor = useColorModeValue('yellow.300', 'gray.700');
-  const bgColor = useColorModeValue('white', 'gray.900');
-  const hoverBgColor = useColorModeValue('yellow.300', 'gray.700');
-
-  const isCurrPage = slugToIndex(pathnameToSlug(pathname)) === navIndex;
+  const isCurrPage: boolean =
+    slugToIndex(pathnameToSlug(pathname)) === navIndex;
 
   return (
     <Box
@@ -129,19 +114,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}
     >
-      <Flex
-        align="center"
-        mx="4"
-        my="2"
-        borderRadius="lg"
-        px="4"
-        py="2"
-        role="group"
-        cursor="pointer"
-        bg={isCurrPage ? highlightedBgColor : bgColor}
-        _hover={{ background: hoverBgColor }}
-        {...rest}
-      >
+      <NavBox variant={isCurrPage ? 'current' : undefined} {...rest}>
         {icon && (
           <Icon
             mr="4"
@@ -153,7 +126,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
           />
         )}
         {children}
-      </Flex>
+      </NavBox>
     </Box>
   );
 };
@@ -163,28 +136,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { push } = useRouter();
   const { toggleColorMode } = useColorMode();
 
+  const bgColor = useColorModeValue('body.light', 'body.dark');
+  const borderColor = useColorModeValue('border.light', 'border.dark');
+
   const linkedInUrl = process.env.NEXT_PUBLIC_PROFILE_LINKEDIN || '';
   const gitHubUrl = process.env.NEXT_PUBLIC_PROFILE_GITHUB || '';
 
   return (
-    <Flex
-      ml={{ base: 0, md: 64 }}
-      px={{ base: 4, md: 4 }}
-      justifyContent={{ base: 'space-between', md: 'flex-end' }}
-      alignItems="center"
-      borderTop={{ base: 0, md: '2px' }}
-      borderRight={{ base: 0, md: '2px' }}
-      borderBottom="2px"
-      borderLeft={{ base: 0, md: '2px' }}
-      borderRadius={{ base: 0, md: 'lg' }}
-      borderColor={{
-        base: useColorModeValue('yellow.300', 'gray.700'),
-        md: useColorModeValue('yellow.300', 'gray.700')
-      }}
-      h="20"
-      bg={useColorModeValue('white', 'gray.900')}
-      {...rest}
-    >
+    <NavBox variant="mobile" {...rest}>
       <IconButton
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
@@ -215,7 +174,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2"
                 >
                   <Text fontSize="sm">Yena Lee</Text>
-                  <Text fontSize="xs" color="gray.600">
+                  <Text fontSize="xs" variant="navSubText">
                     She/her
                   </Text>
                 </VStack>
@@ -224,34 +183,33 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 </Box>
               </HStack>
             </MenuButton>
-            <MenuList
-              bg={useColorModeValue('white', 'gray.900')}
-              borderColor={useColorModeValue('gray.200', 'gray.700')}
-            >
-              <MenuItem
-                onClick={() =>
+            <MenuList bgColor={bgColor} borderColor={borderColor}>
+              <MenuItemBox
+                onMenuItem={() =>
                   push(`${!debug ? `/${repository}` : ''}/profile`)
                 }
               >
                 Profile
-              </MenuItem>
-              <MenuItem>
+              </MenuItemBox>
+              <MenuItemBox>
                 <Link href={linkedInUrl} w="full" isExternal>
                   LinkedIn
                 </Link>
-              </MenuItem>
-              <MenuItem>
+              </MenuItemBox>
+              <MenuItemBox>
                 <Link href={gitHubUrl} w="full" isExternal>
                   GitHub
                 </Link>
-              </MenuItem>
+              </MenuItemBox>
               <MenuDivider />
-              <MenuItem onClick={toggleColorMode}>Switch Color Mode</MenuItem>
+              <MenuItemBox onMenuItem={toggleColorMode}>
+                Switch Color Mode
+              </MenuItemBox>
             </MenuList>
           </Menu>
         </Flex>
       </HStack>
-    </Flex>
+    </NavBox>
   );
 };
 
@@ -259,7 +217,7 @@ const SidebarWithHeader = ({ children }: { children: React.ReactNode }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Box w="100vw" minH="100vh">
+    <Box w="full" minH="full">
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
@@ -277,22 +235,7 @@ const SidebarWithHeader = ({ children }: { children: React.ReactNode }) => {
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
-      <Box
-        mt={{ base: 0, md: 4 }}
-        ml={{ base: 0, md: 64 }}
-        justifyContent={{ base: 'space-between', md: 'flex-end' }}
-        alignItems="center"
-        border={{ base: 0, md: '2px' }}
-        borderRadius={{ base: 0, md: 'lg' }}
-        borderColor={{
-          base: useColorModeValue('yellow.300', 'gray.700'),
-          md: useColorModeValue('yellow.300', 'gray.700')
-        }}
-        p="4"
-        bg={useColorModeValue('white', 'gray.900')}
-      >
-        {children}
-      </Box>
+      <NavBox variant="body">{children}</NavBox>
     </Box>
   );
 };

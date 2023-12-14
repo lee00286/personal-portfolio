@@ -4,7 +4,7 @@ import { NodeData } from '@contentful/rich-text-types';
 import Asset from './Asset';
 
 function Assets({ assets }: { assets: Array<NodeData> }) {
-  const bgColor = useColorModeValue('gray.200', 'gray.600');
+  const bgColor = useColorModeValue('assetBg.light', 'assetBg.dark');
 
   if (!assets || assets.length === 0) return <Box></Box>;
 
