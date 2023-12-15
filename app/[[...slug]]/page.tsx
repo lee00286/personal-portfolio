@@ -5,16 +5,14 @@ import PageBlock from '@/components/PageBlock';
 import { isSlugAccepted } from '@/utils/pageUtils';
 
 function Page({ params }: { params: { slug: string[] } }) {
-  if (!params?.slug) return notFound();
-  if (!isSlugAccepted(params.slug)) return notFound();
-
-  if (params.slug.length === 0) {
+  if (!params?.slug) {
     return (
       <PageMain>
         <Box></Box>
       </PageMain>
     );
   }
+  if (!isSlugAccepted(params.slug)) return notFound();
 
   return (
     <PageMain>
