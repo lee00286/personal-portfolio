@@ -78,6 +78,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const [isWindowLarge, setIsWindowLarge] = useState(false);
 
   useEffect(() => {
+    if (!onClose) return;
     const updateSize = () => {
       if (typeof window === 'undefined') return;
       setIsWindowLarge(window.innerWidth >= 768);
@@ -85,7 +86,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     updateSize();
     window.addEventListener('resize', updateSize);
     if (isWindowLarge) onClose();
-  }, [isWindowLarge]);
+  }, [isWindowLarge, onClose]);
 
   return (
     <SidebarBox {...rest}>
