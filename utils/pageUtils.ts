@@ -34,6 +34,7 @@ export const pathnameToSlug = (pathname: string, isParam = false): string => {
 };
 
 export const isSlugAccepted = (slug: string[]): boolean => {
+  if (slug.length === 0) return true;
   if (baseSlugs.includes(slug[0])) {
     if (slug.length === 1) return true;
     const primarySlug = secondarySlugs[slug[0]];

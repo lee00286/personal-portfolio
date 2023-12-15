@@ -1,6 +1,16 @@
-export const errorTexts = {
+type errorTexts = {
+  [key: string]: {
+    heading: string;
+    tryAgain?: string;
+    buttonText: string;
+    buttonPath: string;
+  };
+};
+
+export const errorTexts: errorTexts = {
   general: {
     heading: 'Something went wrong!',
+    tryAgain: 'Try Again',
     buttonText: 'Return Home',
     buttonPath: '/'
   },

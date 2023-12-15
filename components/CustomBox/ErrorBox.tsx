@@ -1,12 +1,12 @@
 'use client';
 
-import { Box, Heading, useStyleConfig } from '@chakra-ui/react';
+import { Box, Button, Center, Heading, useStyleConfig } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
 import { errorTexts } from '@/utils/errorTexts';
 import { IErrorBox } from './types';
 
 function ErrorBox(props: IErrorBox) {
-  const { variant, ...rest } = props;
+  const { variant, reset, ...rest } = props;
 
   const styles = useStyleConfig('ErrorBox', { variant });
 
@@ -17,9 +17,14 @@ function ErrorBox(props: IErrorBox) {
       <Heading variant="error">
         {variant} | {errorText.heading}
       </Heading>
-      <Link variant="error" href={errorText.buttonPath}>
-        {errorText.buttonText}
-      </Link>
+      <Center>
+        {reset && errorText.tryAgain && (
+          <Button onClick={reset}>{errorText.tryAgain}</Button>
+        )}
+        <Link variant="error" href={errorText.buttonPath}>
+          {errorText.buttonText}
+        </Link>
+      </Center>
     </Box>
   );
 }

@@ -11,6 +11,7 @@ export interface IContentBox extends BoxProps {
 
 export interface IErrorBox extends BoxProps {
   variant?: '404' | undefined;
+  reset?: () => void | undefined;
 }
 
 export interface IHeadingBox extends BoxProps {
