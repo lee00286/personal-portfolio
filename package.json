@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "prod": "npx serve@latest out",
     "lint": "next lint",
     "lint:fix": "next lint -- --fix --ext .mjs,.js,.ts,.jsx,.tsx,.css,.json",
     "format": "prettier --write --config .prettierrc '**/*.{mjs,js,ts,jsx,tsx,css,json}' '!.next'",
