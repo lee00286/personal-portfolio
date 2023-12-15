@@ -4,10 +4,12 @@ import type { StyleFunctionProps } from '@chakra-ui/styled-system';
 
 const styles = {
   global: (props: StyleFunctionProps) => ({
+    ':root': {
+      bgColor: mode('root.light', 'root.dark')(props)
+    },
     body: {
       w: '100vw',
-      minH: '100vh',
-      bgColor: mode('yellow.50', 'gray.900')(props)
+      minH: '100vh'
     },
     main: {
       display: 'flex',
@@ -267,6 +269,10 @@ const components = {
 };
 
 const colors = {
+  root: {
+    light: '#FFFFF0', // yellow.50
+    dark: '#171923' // gray.900
+  },
   error: '#F56565', // red.400
   errorText: '#FFF',
   errorBtn: {
@@ -290,7 +296,7 @@ const colors = {
     dark: '#718096' // gray.500
   },
   body: {
-    light: 'white',
+    light: '#FFF',
     dark: '#171923' // gray.900
   },
   border: {

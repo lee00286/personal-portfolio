@@ -1,15 +1,9 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import { Inter } from 'next/font/google';
 import Providers from '@/components/Providers';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-
-const ColorModeScriptWrapper = dynamic(
-  () => import('@/components/ColorModeScriptWrapper'),
-  { ssr: false }
-);
 
 export const metadata: Metadata = {
   title: 'Portfolio',
@@ -37,7 +31,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ColorModeScriptWrapper />
         <Providers>{children}</Providers>
       </body>
     </html>
