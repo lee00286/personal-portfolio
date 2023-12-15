@@ -8,7 +8,7 @@ import { contentfulPageInitial } from '@/contentful/initial';
 import { pathnameToSlug } from '@/utils/pageUtils';
 
 interface IPageContext {
-  pageData: ContentfulPage;
+  [key: string]: ContentfulPage;
 }
 
 const initialState: IPageContext = {
@@ -21,7 +21,8 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const [isFetching, setisFetching] = useState(true);
-  const [pageData, setPageData]: any = useState(contentfulPageInitial);
+  const [pageData, setPageData]: any = useState(null);
+  const [currPageData, setCurrPageData]: any = useState(null);
   const [page, setPage] = useState(pathnameToSlug(pathname, true));
 
   useEffect(() => {
@@ -30,15 +31,24 @@ export function PageProvider({ children }: { children: React.ReactNode }) {
     if (slug === page && !isFetching) return;
     setisFetching(true);
 
-    getContentfulPage(slug).then((result) => {
-      setPageData(result);
+    if (pageData && pageData[slug]) {
+      setCurrPageData(pageData[slug]);
       setPage(slug);
       setisFetching(false);
-    });
+    } else {
+      getContentfulPage(slug).then((result) => {
+        setPageData({ [slug]: result, ...pageData });
+        setCurrPageData(result);
+        setPage(slug);
+        setisFetching(false);
+      });
+    }
   }, [isFetching, pathname]);
 
   return (
-    <PageContext.Provider value={{ pageData }}>{children}</PageContext.Provider>
+    <PageContext.Provider value={{ pageData: currPageData }}>
+      {children}
+    </PageContext.Provider>
   );
 }
 

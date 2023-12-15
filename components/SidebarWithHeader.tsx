@@ -22,9 +22,9 @@ import {
   MenuList,
   Image,
   Center,
-  Link,
   useColorMode
 } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
 import {
   AcademicCapIcon,
   BuildingOffice2Icon,

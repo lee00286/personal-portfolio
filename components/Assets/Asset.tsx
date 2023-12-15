@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Center, Image, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Center, Image, Text, useColorModeValue } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
 import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 import useContentfulLink from '@/contentful/hooks/useContentfulLink';
 import { LinkIcon } from '@heroicons/react/24/outline';

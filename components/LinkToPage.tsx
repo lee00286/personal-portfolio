@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { Box, Center, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Center, Text, useColorModeValue } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
 import { LinkIcon } from '@heroicons/react/24/outline';
 import useContentfulPage from '@/contentful/hooks/useContentfulPage';
 

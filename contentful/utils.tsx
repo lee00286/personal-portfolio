@@ -16,7 +16,6 @@ import {
 import {
   Code,
   Heading,
-  Link,
   ListItem,
   OrderedList,
   Tag,
@@ -24,6 +23,7 @@ import {
   Text,
   UnorderedList
 } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
 import { ContentfulLine, ContentfulPage } from './types';
 import { contentfulLineInitial, contentfulPageInitial } from './initial';
 
