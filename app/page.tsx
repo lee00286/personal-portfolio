@@ -1,10 +1,10 @@
 import PageMain from '@/components/PageMain';
-import Page from '@/components/Page';
+import { Box } from '@chakra-ui/react';
 
 export default function Home() {
   return (
     <PageMain>
-      <Page />
+      <Box></Box>
     </PageMain>
   );
 }
