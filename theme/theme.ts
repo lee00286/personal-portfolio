@@ -31,6 +31,11 @@ const components = {
       wordBreak: 'break-all'
     },
     variants: {
+      error: {
+        as: 'h1',
+        color: 'errorText',
+        textAlign: 'center'
+      },
       page: {
         as: 'h1',
         mr: '4',
@@ -58,6 +63,18 @@ const components = {
       })
     }
   },
+  Link: {
+    variants: {
+      error: {
+        as: 'button',
+        borderRadius: 'lg',
+        px: '4',
+        py: '3',
+        bgColor: 'errorBtn.default',
+        _hover: { textDecor: 'none', bgColor: 'errorBtn.hover' }
+      }
+    }
+  },
   Spinner: {
     baseStyle: (props: StyleFunctionProps) => ({
       color: mode('spinner.light', 'spinner.dark')(props)
@@ -66,6 +83,19 @@ const components = {
       asset: (props: StyleFunctionProps) => ({
         borderColor: mode('asset.light', 'asset.dark')(props)
       })
+    }
+  },
+  ErrorBox: {
+    baseStyle: {
+      display: 'flex',
+      flexDir: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '10',
+      p: '4',
+      w: '100vw',
+      h: '100vh',
+      bgColor: 'errorBg'
     }
   },
   SidebarBox: {
@@ -234,6 +264,12 @@ const components = {
 };
 
 const colors = {
+  errorBg: '#000',
+  errorText: '#FFF',
+  errorBtn: {
+    default: '#CBD5E0', // gray.300
+    hover: '#A0AEC0' // gray.400
+  },
   nav: {
     light: '#F6E05E', // yellow.300
     dark: '#2D3748' // gray.700

@@ -9,6 +9,10 @@ export interface IContentBox extends BoxProps {
   variant?: '' | undefined;
 }
 
+export interface IErrorBox extends BoxProps {
+  variant?: '404' | undefined;
+}
+
 export interface IHeadingBox extends BoxProps {
   variant?: 'page' | 'section' | undefined;
   emoji?: string | undefined;

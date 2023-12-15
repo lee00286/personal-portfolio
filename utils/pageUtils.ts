@@ -1,21 +1,25 @@
+const baseSlugs = [
+  'profile',
+  'education',
+  'professional-experiences',
+  'other-experiences',
+  'extracurricular-activities',
+  'awards-and-certificates'
+];
+
+const secondarySlugs = {
+  [baseSlugs[1]]: ['relevant-courses']
+};
+
 export const indexToSlug = (index: number): string => {
-  if (index === 0) return 'profile';
-  if (index === 1) return 'education';
-  if (index === 2) return 'professional-experiences';
-  if (index === 3) return 'other-experiences';
-  if (index === 4) return 'extracurricular-activities';
-  if (index === 5) return 'awards-and-certificates';
+  if (index >= 0 && index < baseSlugs.length) {
+    return baseSlugs[index];
+  }
   return '';
 };
 
 export const slugToIndex = (slug: string): number => {
-  if (slug === 'profile') return 0;
-  if (slug === 'education') return 1;
-  if (slug === 'professional-experiences') return 2;
-  if (slug === 'other-experiences') return 3;
-  if (slug === 'extracurricular-activities') return 4;
-  if (slug === 'awards-and-certificates') return 5;
-  return -1;
+  return baseSlugs.findIndex((s) => s === slug);
 };
 
 export const pathnameToSlug = (pathname: string, isParam = false): string => {
@@ -27,4 +31,13 @@ export const pathnameToSlug = (pathname: string, isParam = false): string => {
     }
   }
   return splitPathname[1];
+};
+
+export const isSlugAccepted = (slug: string[]): boolean => {
+  if (baseSlugs.includes(slug[0])) {
+    if (slug.length === 1) return true;
+    const primarySlug = secondarySlugs[slug[0]];
+    if (primarySlug && primarySlug.includes(slug[1])) return true;
+  }
+  return false;
 };

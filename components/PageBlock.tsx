@@ -10,7 +10,7 @@ import HeadingBox from '@/components/CustomBox/HeadingBox';
 import Section from '@/components/Section';
 import SpinnerBox from '@/components/CustomBox/SpinnerBox';
 
-function PageBlock({ params }: { params?: { slug: string } }) {
+function PageBlock({ params }: { params?: { slug: string[] } }) {
   const { pageData } = usePageContext();
 
   const slug: string =
