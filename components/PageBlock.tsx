@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { Box } from '@chakra-ui/react';
 import { renderContentfulRichText } from '@/contentful/utils';
 import { Document } from '@contentful/rich-text-types';
@@ -9,12 +10,13 @@ import ContainerBox from '@/components/CustomBox/ContainerBox';
 import HeadingBox from '@/components/CustomBox/HeadingBox';
 import Section from '@/components/Section';
 import SpinnerBox from '@/components/CustomBox/SpinnerBox';
+import { pathnameToSlug } from '@/utils/pageUtils';
 
-function PageBlock({ params }: { params?: { slug: string[] } }) {
+function PageBlock() {
   const { pageData } = usePageContext();
+  const pathname = usePathname();
 
-  const slug: string =
-    params?.slug && params.slug.length > 0 ? params.slug.slice(-1)[0] : '';
+  const slug: string = pathnameToSlug(pathname, true);
 
   if (!pageData || pageData.pageId < 0) return <SpinnerBox />;
 
