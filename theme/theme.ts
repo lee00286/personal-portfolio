@@ -101,6 +101,9 @@ const components = {
   SidebarBox: {
     baseStyle: (props: StyleFunctionProps) => ({
       pos: 'fixed',
+      display: 'flex',
+      flexDir: 'column',
+      justifyContent: 'space-between',
       border: { base: 0, md: '2px' },
       borderRadius: { base: 0, md: 'lg' },
       borderColor: { md: mode('border.light', 'border.dark')(props) },
@@ -264,7 +267,7 @@ const components = {
 };
 
 const colors = {
-  errorBg: '#000',
+  error: '#F56565', // red.400
   errorText: '#FFF',
   errorBtn: {
     default: '#CBD5E0', // gray.300

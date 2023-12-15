@@ -4,25 +4,24 @@ import { useRouter, usePathname } from 'next/navigation';
 import {
   IconButton,
   Box,
+  BoxProps,
+  Center,
   CloseButton,
-  Flex,
-  HStack,
-  VStack,
-  Icon,
-  useColorModeValue,
-  Text,
   Drawer,
   DrawerContent,
-  useDisclosure,
-  BoxProps,
+  Flex,
   FlexProps,
+  HStack,
+  Icon,
+  Image,
   Menu,
   MenuButton,
   MenuDivider,
   MenuList,
-  Image,
-  Center,
-  useColorMode
+  Text,
+  VStack,
+  useColorModeValue,
+  useDisclosure
 } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
 import {
@@ -40,6 +39,7 @@ import NavBox from '@/components/CustomBox/NavBox';
 import SidebarBox from '@/components/CustomBox/SidebarBox';
 import { useDeployContext } from '@/context/deployContext';
 import { indexToSlug, pathnameToSlug, slugToIndex } from '@/utils/pageUtils';
+import { useEffect, useState } from 'react';
 
 const debug = process.env.NODE_ENV !== 'production';
 const repository = 'portfolio';
@@ -75,29 +75,51 @@ const LinkItems: Array<LinkItemProps> = [
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { prefix } = useDeployContext();
   const { push } = useRouter();
+  const [isWindowLarge, setIsWindowLarge] = useState(false);
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (typeof window === 'undefined') return;
+      setIsWindowLarge(window.innerWidth >= 768);
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    if (isWindowLarge) onClose();
+  }, [isWindowLarge]);
 
   return (
     <SidebarBox {...rest}>
-      <Center h="20" mx="8" mb="2">
-        <Image
-          boxSize="50px"
-          src={`${prefix}/logo-icon.gif`}
-          alt="Logo icon for the page - Duck Emoji"
+      <Flex flexDir="column">
+        <Center h="20" mx="8" mb="2">
+          <Image
+            boxSize="50px"
+            src={`${prefix}/logo-icon.gif`}
+            alt="Logo icon for the page - Duck Emoji"
+          />
+        </Center>
+        {LinkItems.map((link, index) => (
+          <NavItem
+            key={link.name}
+            icon={link.icon}
+            navIndex={index}
+            onClick={() =>
+              push(`${!debug ? `/${repository}` : ''}/${indexToSlug(index)}`)
+            }
+          >
+            {link.name}
+          </NavItem>
+        ))}
+      </Flex>
+      <Center display={{ base: 'flex', md: 'none' }} m="4">
+        <CloseButton
+          p="5"
+          w="full"
+          bgColor="error"
+          borderRadius="lg"
+          color="errorText"
+          onClick={onClose}
         />
       </Center>
-      <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
-      {LinkItems.map((link, index) => (
-        <NavItem
-          key={link.name}
-          icon={link.icon}
-          navIndex={index}
-          onClick={() =>
-            push(`${!debug ? `/${repository}` : ''}/${indexToSlug(index)}`)
-          }
-        >
-          {link.name}
-        </NavItem>
-      ))}
     </SidebarBox>
   );
 };
@@ -120,9 +142,7 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
           <Icon
             mr="4"
             fontSize="16"
-            _groupHover={{
-              color: 'black'
-            }}
+            _groupHover={{ color: 'black' }}
             as={icon}
           />
         )}
@@ -135,7 +155,6 @@ const NavItem = ({ icon, navIndex, children, ...rest }: NavItemProps) => {
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { prefix } = useDeployContext();
   const { push } = useRouter();
-  const { toggleColorMode } = useColorMode();
 
   const bgColor = useColorModeValue('body.light', 'body.dark');
   const borderColor = useColorModeValue('border.light', 'border.dark');
@@ -163,7 +182,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         spacing={{ base: '0', md: '6' }}
         display={{ base: 'none', md: 'flex' }}
       >
-        {/* <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} /> */}
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton
