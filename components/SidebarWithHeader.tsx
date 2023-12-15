@@ -34,11 +34,12 @@ import {
   TrophyIcon,
   UserIcon
 } from '@heroicons/react/24/outline';
+import ColorModeButton from '@/components/ColorModeButton';
+import MenuItemBox from '@/components/CustomBox/MenuItemBox';
+import NavBox from '@/components/CustomBox/NavBox';
+import SidebarBox from '@/components/CustomBox/SidebarBox';
 import { useDeployContext } from '@/context/deployContext';
 import { indexToSlug, pathnameToSlug, slugToIndex } from '@/utils/pageUtils';
-import MenuItemBox from './CustomBox/MenuItemBox';
-import NavBox from './CustomBox/NavBox';
-import SidebarBox from './CustomBox/SidebarBox';
 
 const debug = process.env.NODE_ENV !== 'production';
 const repository = 'portfolio';
@@ -157,7 +158,11 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         src={`${prefix}/logo-icon.gif`}
         alt="Logo icon for the page - Duck Emoji"
       />
-      <HStack spacing={{ base: '0', md: '6' }}>
+      <ColorModeButton />
+      <HStack
+        spacing={{ base: '0', md: '6' }}
+        display={{ base: 'none', md: 'flex' }}
+      >
         {/* <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} /> */}
         <Flex alignItems={'center'}>
           <Menu>
@@ -191,6 +196,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               >
                 Profile
               </MenuItemBox>
+              <MenuDivider />
               <MenuItemBox>
                 <Link href={linkedInUrl} w="full" isExternal>
                   LinkedIn
@@ -200,10 +206,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 <Link href={gitHubUrl} w="full" isExternal>
                   GitHub
                 </Link>
-              </MenuItemBox>
-              <MenuDivider />
-              <MenuItemBox onMenuItem={toggleColorMode}>
-                Switch Color Mode
               </MenuItemBox>
             </MenuList>
           </Menu>

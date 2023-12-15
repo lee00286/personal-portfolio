@@ -135,7 +135,7 @@ const components = {
         _hover: { bgColor: mode('nav.light', 'nav.dark')(props) }
       }),
       mobile: (props: StyleFunctionProps) => ({
-        justifyContent: { base: 'space-between', md: 'flex-end' },
+        justifyContent: 'space-between',
         ml: { base: 0, md: 64 },
         mr: 0,
         my: 0,
@@ -277,6 +277,14 @@ const colors = {
   navSubText: {
     light: '#4A5568', // gray.600
     dark: '#A0AEC0' // gray.400
+  },
+  btnBg: {
+    light: '#FEFCBF', // yellow.100
+    dark: '#4A5568' // gray.600
+  },
+  btnHover: {
+    light: '#F6E05E', // yellow.300
+    dark: '#718096' // gray.500
   },
   body: {
     light: 'white',
